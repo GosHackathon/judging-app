@@ -1,0 +1,104 @@
+/* General styling for the form */
+form {
+  width: 100%;
+  margin: 20px auto;
+  font-family: Arial, sans-serif;
+}
+
+/* Table styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+thead {
+  background-color: #f2f2f2;
+}
+
+th,
+td {
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+/* Category column styling */
+th:first-child,
+td:first-child {
+  text-align: left;
+}
+
+/* Styling for the table header */
+th {
+  background-color: #4caf50;
+  color: white;
+  font-weight: bold;
+}
+
+/* Radio button styling */
+input[type="radio"] {
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+/* Submit button styling */
+button[type="submit"] {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+/* Responsive design: Adjust the table layout for smaller screens */
+@media (max-width: 768px) {
+  table,
+  thead,
+  tbody,
+  th,
+  td,
+  tr {
+    display: block;
+    width: 100%;
+  }
+
+  th,
+  td {
+    padding: 10px;
+    text-align: left;
+  }
+
+  th:first-child,
+  td:first-child {
+    text-align: left;
+  }
+
+  tr {
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  td {
+    border: none;
+    border-bottom: 1px solid #ddd;
+    position: relative;
+    padding-left: 50%;
+  }
+
+  td::before {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    content: attr(data-label);
+    font-weight: bold;
+  }
+}
