@@ -1,4 +1,3 @@
-// routes/auth.js
 const express = require("express");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -57,15 +56,59 @@ router.post(
       };
 
       // Sign token
-      jwt.sign(
-        payload,
-        process.env.JWT_SECRET,
-        { expiresIn: "5h" },
-        (err, token) => {
-          if (err) throw err;
-          res.json({ token });
-        }
-      );
+      const token = jwt.sign(payload, process.env.JWT_SECRET, {
+        expiresIn: "5h",
+      });
+      res.json({ token });
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send("Server error");
+    }
+  }
+);
+
+// @route    POST /api/auth/login
+// @desc     Authenticate user and get token
+// @access   Public
+router.post(
+  "/login",
+  [
+    check("email", "Please include a valid email").isEmail(),
+    check("password", "Password is required").exists(),
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const { email, password } = req.body;
+
+    try {
+      // Check if judge exists
+      let judge = await Judge.findOne({ email });
+      if (!judge) {
+        return res.status(400).json({ msg: "Invalid credentials" });
+      }
+
+      // Check if password is correct
+      const isMatch = await bcrypt.compare(password, judge.password);
+      if (!isMatch) {
+        return res.status(400).json({ msg: "Invalid credentials" });
+      }
+
+      // Create payload for JWT
+      const payload = {
+        judge: {
+          id: judge.id,
+        },
+      };
+
+      // Sign token
+      const token = jwt.sign(payload, process.env.JWT_SECRET, {
+        expiresIn: "5h",
+      });
+      res.json({ token });
     } catch (err) {
       console.error(err.message);
       res.status(500).send("Server error");
