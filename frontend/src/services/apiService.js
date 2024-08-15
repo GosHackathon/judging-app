@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // Define your API base URL
-const API_URL = "http://localhost:5000/api";
+const API_URL = "http://localhost:5003/api";
 
 // Signup user
 export const signupUser = async (name, email, password) => {
@@ -11,6 +11,9 @@ export const signupUser = async (name, email, password) => {
       email,
       password,
     });
+    // Store token in localStorage
+    const { token } = response.data;
+    localStorage.setItem("token", token);
     return response.data;
   } catch (error) {
     // Include error response details
@@ -28,6 +31,9 @@ export const loginUser = async (email, password) => {
       email,
       password,
     });
+    // Store token in localStorage
+    const { token } = response.data;
+    localStorage.setItem("token", token);
     return response.data;
   } catch (error) {
     // Include error response details
@@ -38,33 +44,54 @@ export const loginUser = async (email, password) => {
   }
 };
 
-// Other existing exports
+// Get user data
+export const getUserData = async () => {
+  try {
+    const token = localStorage.getItem("token");
+    const response = await axios.get(`${API_URL}/user/userData`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    // Handle error
+    const errorMessage = error.response
+      ? error.response.data.msg
+      : "Error fetching user data";
+    throw new Error(errorMessage);
+  }
+};
+
+// Get leaderboard
 export const getLeaderboard = async () => {
   try {
     const response = await axios.get(`${API_URL}/leaderboard`);
     return response.data;
   } catch (error) {
     // Handle error
-    throw new Error("Error fetching leaderboard");
+    const errorMessage = error.response
+      ? error.response.data.msg
+      : "Error fetching leaderboard";
+    throw new Error(errorMessage);
   }
 };
 
-export const getUserData = async () => {
-  try {
-    const response = await axios.get(`${API_URL}/userData`);
-    return response.data;
-  } catch (error) {
-    // Handle error
-    throw new Error("Error fetching user data");
-  }
-};
-
+// Post scores
 export const postScores = async (scores) => {
   try {
-    const response = await axios.post(`${API_URL}/scores`, scores);
+    const token = localStorage.getItem("token");
+    const response = await axios.post(`${API_URL}/scores`, scores, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     return response.data;
   } catch (error) {
     // Handle error
-    throw new Error("Error posting scores");
+    const errorMessage = error.response
+      ? error.response.data.msg
+      : "Error posting scores";
+    throw new Error(errorMessage);
   }
 };
