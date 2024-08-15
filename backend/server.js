@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const { Server } = require("socket.io");
 const authRoutes = require("./routes/auth");
 const scoreRoutes = require("./routes/score");
+const userRoutes = require("./routes/user"); // Import the user route
 require("dotenv").config();
 
 const app = express();
@@ -29,10 +30,10 @@ app.use(express.json());
 // CORS middleware
 app.use(
   cors({
-    origin: "*", // Replace with your frontend URL
+    origin: "http://localhost:3000", // Adjust this to your frontend URL
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: true, // Enable credentials
+    credentials: true,
   })
 );
 
@@ -42,6 +43,7 @@ app.options("*", cors());
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/scores", scoreRoutes);
+app.use("/api/user", userRoutes); // Add user routes
 
 // WebSocket setup
 io.on("connection", (socket) => {
