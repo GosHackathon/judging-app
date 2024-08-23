@@ -1,6 +1,7 @@
 const express = require("express");
 const http = require("http");
 const mongoose = require("mongoose");
+const fileUpload = require('express-fileupload');
 const { Server } = require("socket.io");
 const cors = require("cors");
 const helmet = require("helmet");
@@ -9,6 +10,7 @@ const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
 require("dotenv").config();
+
 
 // Import routes
 const authRoutes = require("./routes/auth");
@@ -34,7 +36,10 @@ mongoose
 // Middleware setup
 app.use(express.json()); // For parsing application/json
 app.use(helmet()); // Security headers
-app.use(cors({ origin: "http://localhost:3000", credentials: true })); // Cross-Origin Resource Sharing
+app.use(fileUpload());
+
+app.use(cors());
+//app.use(cors({ origin: "http://localhost:3000", credentials: true })); // Cross-Origin Resource Sharing
 
 // Rate Limiting
 const limiter = rateLimit({
