@@ -8,6 +8,7 @@ import Dashboard from "./components/Dashboard";
 import ScoreEntry from "./components/ScoreEntry";
 import Leaderboard from "./components/Leaderboard";
 import TeamManagement from "./components/TeamManagement";
+import JudgeGroups from "./components/JudgeGroups"; 
 import ProtectedRoute from "./auth/ProtectedRoute";
 import MainJudgeHome from "./components/MainJudgeHome";
 
@@ -39,6 +40,8 @@ function App() {
           path="/team-management"
           element={<ProtectedRoute element={<TeamManagement />} />}
         />
+        <Route path="/" element={<TeamManagement />} />
+        <Route path="/judge-groups" element={<JudgeGroups />} />
       </Routes>
     </Router>
   );
