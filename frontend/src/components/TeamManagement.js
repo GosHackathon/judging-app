@@ -1,13 +1,17 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./TeamManagement.css"; // Import the CSS file for styling
+//import { useHistory } from "react-router-dom";
 // Define the base URL from environment variables
+import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5003/api";
 
 const TeamManagement = () => {
   const [file, setFile] = useState(null);
   const [message, setMessage] = useState("");
-
+  //const [tableData, setTableData] = useState([]); // State for table data
+  //const [showTable, setShowTable] = useState(false); // State for showing table
+  const navigate = useNavigate(); // Initialize useNavigate
   const handleFileChange = (event) => {
     setFile(event.target.files[0]);
   };
@@ -56,14 +60,17 @@ const TeamManagement = () => {
       console.error("Error downloading file:", error);
     }
   };
-
+  const viewJudgeGroups = () => {
+    navigate('/judge-groups'); // Navigate to the JudgeGroups page
+  };
+  
   return (
     <div className="team-management">
       <h1>Team Management</h1>
       <div className="upload-section">
         <input type="file" accept=".xlsx, .xls" onChange={handleFileChange} />
         <button onClick={handleFileUpload} className="button">
-          Upload Excel Sheet
+          Upload Excel File
         </button>
         {message && <p className="message">{message}</p>}
       </div>
@@ -71,9 +78,13 @@ const TeamManagement = () => {
         <button onClick={handleFileDownload} className="button">
           Download Team Template
         </button>
-      </div>
+        </div>
+      <div className="view-section">
+        <button onClick={viewJudgeGroups} className="button">
+          View Judge Groups
+        </button>
+        </div>
     </div>
   );
 };
-
 export default TeamManagement;
