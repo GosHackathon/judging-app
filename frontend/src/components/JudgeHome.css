@@ -1,0 +1,57 @@
+/* JudgeHome.css */
+
+.main-container {
+  display: flex;
+  height: 100vh; /* Full viewport height */
+  overflow: hidden; /* Prevents scrolling */
+}
+
+.sidebar {
+  width: 250px; /* Width of the sidebar */
+  background-color: #333; /* Dark background color */
+  color: #fff; /* White text color */
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  position: fixed;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.content {
+  flex-grow: 1;
+  margin-left: 250px; /* Matches the width of the sidebar */
+  padding: 40px; /* Padding for the content */
+  background-color: #f9f9f9; /* Light background for content */
+  overflow-y: auto; /* Allows content to scroll if necessary */
+}
+
+.intro {
+  max-width: 800px; /* Maximum width for the intro section */
+  margin: 0 auto; /* Center align the intro section */
+  text-align: left; /* Left align text */
+}
+
+.intro h1 {
+  font-size: 36px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.intro h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #666;
+}
+
+.intro p {
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 15px;
+  color: #444;
+}
+
+.intro p:last-child {
+  margin-bottom: 0; /* Remove margin from the last paragraph */
+}

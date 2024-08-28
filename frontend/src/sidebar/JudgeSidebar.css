@@ -1,0 +1,37 @@
+/* JudgeSidebar.css */
+.judge-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 200px; /* Adjust width as needed */
+  background-color: #343a40;
+  color: #ffffff;
+  padding: 20px;
+  overflow-y: auto; /* Allow scrolling if content overflows */
+  z-index: 100; /* Ensure the sidebar is above other content */
+}
+
+.judge-sidebar-title {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.judge-sidebar-nav {
+  list-style: none;
+  padding: 0;
+}
+
+.judge-sidebar-navItem {
+  margin-bottom: 0.5rem;
+}
+
+.judge-sidebar-navLink {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.judge-sidebar-navLink:hover {
+  text-decoration: underline;
+}

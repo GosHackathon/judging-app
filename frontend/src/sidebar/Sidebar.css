@@ -1,0 +1,40 @@
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 250px; /* Adjust width as needed */
+  background-color: #343a40; /* Dark background for the sidebar */
+  color: #ffffff; /* White text color */
+  padding: 20px;
+  overflow-y: auto; /* Scroll if content overflows */
+  z-index: 999; /* Ensure the sidebar is below the navbar */
+}
+
+.sidebar-title {
+  font-size: 1.5rem;
+  margin: 0;
+  color: #ffffff;
+}
+
+.sidebar-nav {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-navItem {
+  margin-bottom: 10px;
+}
+
+.sidebar-navLink {
+  color: #ffffff; /* White text color for links */
+  text-decoration: none;
+  display: block;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.sidebar-navLink:hover {
+  background-color: #495057; /* Slightly lighter background on hover */
+}
