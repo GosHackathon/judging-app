@@ -16,6 +16,7 @@ import JudgeList from './components/JudgeList';
 import TeamList from "./components/TeamList";
 import JudgeHome from "./components/JudgeHome";
 import Form from "./components/Form";
+import ForgetPassword from "./auth/Forgetpassword";
 function App() {
   return (
     <Router>
@@ -23,6 +24,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/main-judge-login" element={<MainJudgeLogin />} />
         <Route path="/main-judge-signup" element={<MainJudgeSignup />} />
+        <Route path="/forget-password" element={<ForgetPassword />} />
         <Route path="/signup" element={<Signup />} />
 
         {/* Wrap judge-related routes with Layout component */}
