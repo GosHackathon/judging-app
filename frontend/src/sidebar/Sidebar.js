@@ -24,7 +24,7 @@ function Sidebar() {
             </Link>
           </li>
           <li className="sidebar-navItem">
-            <Link to="/judge-management" className="sidebar-navLink">
+            <Link to="/judges" className="sidebar-navLink">
               Judge Management
             </Link>
           </li>

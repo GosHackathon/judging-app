@@ -2,8 +2,6 @@
 
 .main-container {
   display: flex;
-  height: 100vh; /* Full viewport height */
-  overflow: hidden; /* Prevents scrolling */
 }
 
 .sidebar {
@@ -20,11 +18,13 @@
 }
 
 .content {
-  flex-grow: 1;
-  margin-left: 250px; /* Matches the width of the sidebar */
-  padding: 40px; /* Padding for the content */
-  background-color: #f9f9f9; /* Light background for content */
-  overflow-y: auto; /* Allows content to scroll if necessary */
+  margin-left: 250px; /* Adjust according to sidebar width */
+  margin-top:80px;
+  padding: 20px;
+  flex: 1;
+  max-width: 800px;
+  
+  text-align: left;
 }
 
 .intro {

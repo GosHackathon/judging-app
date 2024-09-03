@@ -1,35 +1,37 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getMainJudgeData } from "../services/apiService";
-import "./FixedNavbar.css";
+import { getUserData } from "../services/apiService";
+import "./JudgeNavbar.css";
 
-function FixedNavbar() {
-  const [mainJudge, setMainJudge] = useState(null);
+function JudgeNavbar() {
+    const [user, setUser] = useState(null);
+    const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchMainJudgeData = async () => {
+    const fetchData = async () => {
       try {
-        const data = await getMainJudgeData();
-        setMainJudge(data);
+        const userResponse = await getUserData();
+        if (userResponse) {
+          setUser(userResponse);
+        }
       } catch (error) {
         console.error("Error fetching Main Judge data:", error);
         setError("Failed to fetch data");
-        navigate("/main-judge-login");
+        navigate("/login");
       } finally {
         setLoading(false);
       }
     };
 
-    fetchMainJudgeData();
+    fetchData();
   }, [navigate]);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    navigate("/main-judge-login");
+    navigate("/login");
   };
 
   const toggleDropdown = () => {
@@ -40,7 +42,7 @@ function FixedNavbar() {
   if (error) return <div>{error}</div>; // Add an error state
 
   return (
-    <div className="fixed-navbar">
+    <div className="judge-navbar">
       <div className="d-flex align-items-center">
         <h2 className="nav-header-title">Organization Admin</h2>
         <span className="route-text"> / Home</span>
@@ -48,8 +50,8 @@ function FixedNavbar() {
       <div className="d-flex align-items-center profile-info-container">
         <img src="/assets/images/admin/Profile.svg" alt="profile" />
         <div className="d-flex flex-column user-info-container">
-          <p className="mb-0 user-name">{mainJudge.name}</p>
-          <p className="user-email">{mainJudge.email}</p>
+          <p className="mb-0 user-name">{user.name}</p>
+          <p className="user-email">{user.email}</p>
         </div>
         <button
           className="dropdown-toggle"
@@ -69,4 +71,4 @@ function FixedNavbar() {
   );
 }
 
-export default FixedNavbar;
+export default JudgeNavbar;
