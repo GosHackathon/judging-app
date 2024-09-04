@@ -1,16 +1,22 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { loginMainJudge } from "../services/apiService";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGavel } from "@fortawesome/free-solid-svg-icons";
+import { faGavel, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import "./MainJudgeLogin.css";
 
 function MainJudgeLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const navigate = useNavigate();
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -63,18 +69,26 @@ function MainJudgeLogin() {
               required
             />
           </div>
-          <div className="form-group">
+          <div className="form-group password-field">
             <input
-              type="password"
+              type={showPassword ? "text" : "password"} // Toggle input type based on state
               className="form-control"
               placeholder="Enter your password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
+            <FontAwesomeIcon
+              icon={showPassword ? faEyeSlash : faEye}
+              onClick={togglePasswordVisibility}
+              className="password-toggle-icon"
+            />
           </div>
+          <p>
+            <Link to="/forget-password">Forget Password?</Link>
+          </p>
           <button type="submit" className="btn btn-primary btn-block">
-            Sign In
+            LOG IN
           </button>
           <div className="signup-link text-center mt-3">
             <p>
@@ -82,7 +96,7 @@ function MainJudgeLogin() {
               <a href="/main-judge-signup">Sign Up as a Main Judge</a>
             </p>
             <p>
-              Not a Judge? <a href="/">Login as a Judge</a>
+              Not a Judge? <Link to="/login">Login as a Judge</Link>
             </p>
           </div>
         </form>

@@ -4,9 +4,32 @@ const jwt = require("jsonwebtoken");
 const { check, validationResult } = require("express-validator");
 const Judge = require("../models/Judge");
 const MainJudge = require("../models/MainJudge"); // Import the MainJudge model
+const JudgeGroup = require("../models/JudgeGroup");
 
 const router = express.Router();
 
+// Function to get teams for a judge
+async function getTeamsForJudge(judgeEmail) {
+  try {
+    // Find the JudgeGroup where the judge's email exists
+    const judgeGroup = await JudgeGroup.findOne({
+      'judges.email': judgeEmail
+    }).populate('teams'); // Populate teams if it references the Team model
+
+    console.log('JudgeGroup found:', judgeGroup);
+
+    if (!judgeGroup) {
+      return [];
+    }
+
+    // Return the teams associated with the JudgeGroup
+    console.log('Teams found:', judgeGroup.teams);
+    return judgeGroup.teams;
+  } catch (error) {
+    console.error('Error fetching teams:', error);
+    return [];
+  }
+}
 // @route    POST /api/auth/signup
 // @desc     Register a new judge
 // @access   Public
@@ -132,6 +155,7 @@ router.post(
 // @route    POST /api/auth/login
 // @desc     Authenticate judge and get token
 // @access   Public
+// Login route
 router.post(
   "/login",
   [
@@ -159,6 +183,21 @@ router.post(
         return res.status(400).json({ msg: "Invalid credentials" });
       }
 
+      // Fetch associated teams from JudgeGroup schema
+      const judgeGroup = await JudgeGroup.findOne({
+        'judges.email': email
+      }).populate('teams'); // Populate teams if it references the Team model
+
+      if (!judgeGroup) {
+        return res.status(404).json({ msg: "JudgeGroup not found" });
+      }
+
+      // Update or create Judge with team details
+      judge.teams = judgeGroup.teams.map(team => team._id); // Update with team IDs
+      await judge.save();
+      // Optionally, populate the teams in the judge object before sending the response
+      judge = await Judge.findById(judge._id).populate('teams');
+
       // Create payload for JWT
       const payload = {
         judge: {
@@ -170,13 +209,16 @@ router.post(
       const token = jwt.sign(payload, process.env.JWT_SECRET, {
         expiresIn: "5h",
       });
-      res.json({ token });
+
+      // Respond with token and updated judge data
+      res.json({ token, judge });
     } catch (err) {
       console.error(err.message);
       res.status(500).send("Server error");
     }
   }
 );
+
 
 // @route    POST /api/auth/main-judge-login
 // @desc     Authenticate Main Judge and get token

@@ -17,7 +17,9 @@ const scoreRoutes = require("./routes/score");
 const userRoutes = require("./routes/user");
 const mainJudgeRoutes = require("./routes/mainJudgeRoutes");
 const teamManagementRoutes = require("./routes/teamManagementRoutes");
-
+const teamListRoutes = require("./routes/teamList");
+const teamRoutes = require('./routes/teams');
+const judgeListRoutes = require('./routes/judgeList');
 // Initialize Express app and HTTP server
 const app = express();
 const server = http.createServer(app);
@@ -69,7 +71,9 @@ app.use("/api/scores", scoreRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/main-judge", mainJudgeRoutes);
 app.use("/api/team-management", teamManagementRoutes);
-
+app.use("/api/teamList", teamListRoutes);
+app.use('/api/teams', teamRoutes); // Use the new route
+app.use('/api/judgeList', judgeListRoutes);
 // WebSocket setup
 io.on("connection", (socket) => {
   console.log("A user connected");

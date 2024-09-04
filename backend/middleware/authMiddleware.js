@@ -28,7 +28,7 @@ const authMiddleware = async (req, res, next) => {
 
     // Add user details to the request
     req.user = { id: req.userId, userType: req.userType };
-
+    //console.log('Middleware - User:', req.user);
     // Optional: Attach user data to the request if needed
     if (req.userType === "judge") {
       req.userDetails = await Judge.findById(req.userId).select("-password");

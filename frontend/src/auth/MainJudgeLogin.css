@@ -1,94 +1,109 @@
-/* MainJudgeLogin.css */
+body {
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  background: url("/public/images/GoSH24.png") no-repeat center center fixed;
+  background-size: cover;
+}
 
 .login-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  background-color: #f8f9fa; /* Light grey background */
+  height: 100vh;
 }
 
 .login-form {
-  background-color: #ffffff; /* White background for the form */
-  padding: 40px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-  width: 100%;
   max-width: 400px;
-  box-sizing: border-box;
-}
-
-.login-form .text-center {
-  margin-bottom: 24px;
+  width: 100%;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  background: white;
+  text-align: center;
 }
 
 .login-form h2 {
-  font-size: 1.8rem;
-  margin: 0;
-  font-weight: 600;
+  margin-bottom: 20px;
+  font-size: 28px;
   color: #333;
 }
 
 .login-form .form-group {
-  margin-bottom: 20px;
+  position: relative;
 }
 
-.login-form .form-control {
+.login-form input {
   width: 100%;
-  padding: 12px;
-  font-size: 1rem;
-  border-radius: 4px;
-  border: 1px solid #ced4da; /* Border similar to Bootstrap */
+  padding: 15px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
   box-sizing: border-box;
-  transition: border-color 0.2s;
 }
 
-.login-form .form-control:focus {
-  border-color: #007bff; /* Blue border on focus */
-  outline: none;
-}
-
-.login-form .btn {
-  width: 100%;
-  padding: 12px;
-  font-size: 1rem;
-  font-weight: 600;
-  color: #fff;
-  background-color: #007bff; /* Primary color */
-  border: none;
-  border-radius: 4px;
+.password-field .password-toggle-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
   cursor: pointer;
-  transition: background-color 0.2s;
+  color: #888;
 }
 
-.login-form .btn:hover {
-  background-color: #0056b3; /* Darker blue on hover */
+.login-form button {
+  padding: 15px;
+  border: none;
+  border-radius: 8px;
+  background: #ff7300;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.login-form .error {
-  color: #dc3545; /* Red color for errors */
-  margin-bottom: 20px;
-  font-weight: 600;
+.login-form button:hover {
+  background: darkorange;
 }
 
-.login-form .success {
-  color: #28a745; /* Green color for success messages */
-  margin-bottom: 20px;
-  font-weight: 600;
+.error {
+  color: #e1702e;
+  margin-bottom: 15px;
 }
 
-.login-form .signup-link p {
+.success {
+  color: #e89326;
+  margin-bottom: 15px;
+}
+
+.signup-link {
+  margin-top: 20px;
+  text-align: center; /* Center the text and links */
+}
+
+.signup-link p {
+  
   margin: 0;
-  font-size: 0.9rem;
-  color: #6c757d; /* Slightly muted text color */
+  margin-top: 10px;
+  color: black; /* Set the text color to black */
 }
 
-.login-form .signup-link a {
-  color: #007bff;
+.signup-link a {
+  
+  color: darkorange;
   text-decoration: none;
-  font-weight: 600;
+  font-weight: lighter;
 }
 
-.login-form .signup-link a:hover {
+.signup-link a:hover {
+  
   text-decoration: underline;
+}
+
+
+/* New CSS to align "Forget password?" link to the right */
+.login-form p {
+  text-align: right; /* Align text to the right */
+  margin: 0; /* Remove default margin */
+  margin-bottom: 15px; /* Add margin below for spacing */
 }
