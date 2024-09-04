@@ -1,17 +1,48 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { getUserData } from "../services/apiService";
 import "./JudgeHome.css"; // Import the CSS file
-import Sidebar from "../sidebar/Sidebar";
+import JudgeSidebar from "../sidebar/JudgeSidebar";
+import JudgeNavbar from "../navbar/JudgeNavbar";
 
 function JudgeHome() {
+
+  const [user, setUser] = useState(null);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const userResponse = await getUserData();
+        if (userResponse) {
+          setUser(userResponse);
+        }
+      } catch (error) {
+        setError("Error fetching user data.");
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+
+  if (error) {
+    return <div className="error-message">{error}</div>;
+  }
+
+  if (!user) {
+    return <div>Loading...</div>;
+  }
+
+
   return (
     <div className="main-container">
-      {/* Include the Sidebar component */}
-      <Sidebar />
-
-      {/* Main Content */}
+      <JudgeSidebar />
+      <JudgeNavbar />
       <main className="content">
         <section className="intro">
-          <h1>GoSHACKATHON</h1>
+        <h1>Welcome, {user.name}!</h1>
+          <h2>GoSHACKATHON</h2>
           <h2>WESTERN AUSTRALIA</h2>
           <p>Bend and break barriers at GoSH!</p>
           <p>
@@ -25,6 +56,7 @@ function JudgeHome() {
             and finally, partake in the major GoSHackathon Day Two hackathon
             event that will be open to teams from across Western Australia.
           </p>
+        
         </section>
       </main>
     </div>

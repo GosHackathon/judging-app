@@ -4,34 +4,39 @@
   top: 0;
   left: 0;
   bottom: 0;
-  width: 200px; /* Adjust width as needed */
-  background-color: #343a40;
-  color: #ffffff;
+  width: 250px; /* Adjust width as needed */
+  background-color: #343a40; /* Dark background for the sidebar */
+  color: #ffffff; /* White text color */
   padding: 20px;
-  overflow-y: auto; /* Allow scrolling if content overflows */
-  z-index: 100; /* Ensure the sidebar is above other content */
+  overflow-y: auto; /* Scroll if content overflows */
+  z-index: 999; /* Ensure the sidebar is below the navbar */
 }
+
 
 .judge-sidebar-title {
   font-size: 1.5rem;
-  margin-bottom: 1rem;
+  margin: 0;
+  color: #ffffff;
 }
+
 
 .judge-sidebar-nav {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
-
 .judge-sidebar-navItem {
-  margin-bottom: 0.5rem;
+  margin-bottom: 10px;
 }
 
 .judge-sidebar-navLink {
-  color: #ffffff;
+  color: #ffffff; /* White text color for links */
   text-decoration: none;
-  font-size: 1rem;
+  display: block;
+  padding: 10px;
+  border-radius: 4px;
 }
 
 .judge-sidebar-navLink:hover {
-  text-decoration: underline;
+  background-color: #495057; /* Slightly lighter background on hover */
 }

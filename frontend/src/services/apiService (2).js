@@ -200,7 +200,6 @@ export const uploadTeamFile = async (file) => {
   );
 };
 
-
 // Function to fetch the list of judges
 export const fetchJudges = async () => {
   try {

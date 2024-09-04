@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const uploadTeamSchema = new mongoose.Schema({
   teamName: {
@@ -16,11 +16,11 @@ const uploadTeamSchema = new mongoose.Schema({
   },
   allocatedJudge: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Judge",
+    ref: 'Judge',
     required: false, // Make it optional initially
   },
 });
 
-const UploadTeam = mongoose.model("UploadTeam", uploadTeamSchema);
+const UploadTeam = mongoose.model('UploadTeam', uploadTeamSchema);
 
 module.exports = UploadTeam;

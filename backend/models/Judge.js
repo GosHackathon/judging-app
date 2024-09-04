@@ -1,10 +1,17 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
-const JudgeSchema = new mongoose.Schema({
+const judgeSchema = new mongoose.Schema({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  teams: [{ type: mongoose.Schema.Types.ObjectId, ref: "Team" }], // Reference to Team model
+  judgeGroup: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'JudgeGroup', // Reference to the JudgeGroup model
+    required: false, // Make it optional if needed
+  },
+  teams: [{ type: mongoose.Schema.Types.ObjectId, ref: 'UploadTeam' }], // Reference to Team model
 });
 
-module.exports = mongoose.model("Judge", JudgeSchema);
+const Judge = mongoose.model('Judge', judgeSchema);
+
+module.exports = Judge;
