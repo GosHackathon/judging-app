@@ -1,0 +1,91 @@
+/* src/components/Form.css */
+
+.form-container {
+  padding: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.form-title {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.form-header {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.num-org-input {
+  margin-left: 10px;
+  padding: 5px;
+  font-size: 16px;
+  width: 60px;
+}
+
+.form-content {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.organization-section {
+  margin-bottom: 30px;
+}
+
+.organization-title {
+  margin-bottom: 15px;
+  font-size: 24px;
+}
+
+.org-input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.form-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.form-table th,
+.form-table td {
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+.category-cell {
+  font-weight: bold;
+}
+
+.rating-cell {
+  padding: 5px;
+}
+
+.radio-input {
+  margin-right: 5px;
+}
+
+.submit-button {
+  padding: 12px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+}
+
+.submit-button:hover {
+  background-color: #0056b3;
+}
