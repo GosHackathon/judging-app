@@ -1,6 +1,6 @@
 /* Signup.css */
 body {
-  margin: 0;
+  margin: 20px;
   font-family: "Roboto", sans-serif;
   background: url("/public/images/GoSH24.png") no-repeat center center fixed;
   background-size: cover;
@@ -11,7 +11,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay for readability */
+  background: white; /* Semi-transparent overlay for readability */
 }
 
 .signup-form {
@@ -49,7 +49,7 @@ body {
   padding: 15px;
   border: none;
   border-radius: 8px;
-  background: #007bff;
+  background: #ff9500;
   color: #fff;
   font-size: 16px;
   cursor: pointer;
@@ -57,7 +57,7 @@ body {
 }
 
 .signup-form button:hover {
-  background: #0056b3;
+  background: #ea7f05;
 }
 
 .error {
@@ -66,7 +66,7 @@ body {
 }
 
 .success {
-  color: #2ecc71;
+  color: #ea840f;
   margin-bottom: 15px;
 }
 
@@ -75,7 +75,7 @@ body {
 }
 
 .login-link a {
-  color: #007bff;
+  color: #ed6e0c;
   text-decoration: none;
   font-weight: bold;
 }

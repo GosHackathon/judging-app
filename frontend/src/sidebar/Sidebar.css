@@ -1,3 +1,4 @@
+/* Sidebar container */
 .sidebar {
   position: fixed;
   top: 0;
@@ -16,6 +17,7 @@
   width: 100px;
 }
 
+/* Header of the sidebar */
 .sidebar-header {
   display: flex;
   justify-content: space-between;
@@ -41,6 +43,7 @@
   font-size: 1rem;
 }
 
+/* Navigation list styles */
 .sidebar-nav {
   list-style: none;
   padding: 0;
@@ -51,6 +54,7 @@
   margin-bottom: 15px;
 }
 
+/* Base styles for navigation links */
 .sidebar-navLink {
   color: #ecf0f1;
   text-decoration: none;
@@ -59,20 +63,57 @@
   padding: 10px;
   border-radius: 4px;
   transition: background-color 0.3s ease;
+  background-color: #2c3e50; /* Ensure default background color */
+  border: none; /* Remove default button borders */
+  outline: none; /* Remove default focus outline */
 }
 
 .sidebar-navLink span {
   margin-left: 10px;
 }
 
+/* Hover effect for navigation links */
 .sidebar-navLink:hover {
   background-color: #34495e;
 }
 
+/* Styles for active links */
+.sidebar-navLink.active {
+  background-color: #1abc9c; /* Example active color */
+}
+
+/* Collapsed state */
 .sidebar.collapsed .sidebar-navLink {
   justify-content: center;
 }
 
 .sidebar.collapsed .sidebar-navLink span {
   display: none;
+}
+
+/* Sub-menu styling */
+.sidebar-nav .sidebar-subnav {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background-color: #34495e; /* Ensure sub-menu background color matches the sidebar */
+}
+
+.sidebar-nav .sidebar-subnav .sidebar-navItem {
+  margin-bottom: 0;
+}
+
+.sidebar-nav .sidebar-subnav .sidebar-navLink {
+  padding: 10px 20px;
+  font-size: 14px;
+  background-color: #34495e; /* Sub-menu background color */
+  color: #ecf0f1; /* Ensure text color */
+  display: flex;
+  align-items: center;
+  border: none; /* Remove default button borders */
+  outline: none; /* Remove default focus outline */
+}
+
+.sidebar-nav .sidebar-subnav .sidebar-navLink:hover {
+  background-color: #2c3e50; /* Hover effect for sub-menu */
 }

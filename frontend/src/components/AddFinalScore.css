@@ -1,0 +1,157 @@
+/* Scoped Styles for JudgeGroupSelector */
+.judge-group-selector {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f5f6f7;
+}
+
+.judge-group-selector .container {
+  margin: 0 auto;
+  max-width: 1000px;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.judge-group-selector h1, .judge-group-selector h2 {
+  color: #333;
+}
+
+.judge-group-selector h1 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.judge-group-selector h2 {
+  font-size: 22px;
+  margin-top: 20px;
+  margin-bottom: 15px;
+  font-weight: 500;
+}
+
+.judge-group-selector select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 16px;
+  color: #333;
+  background-color: #f9f9f9;
+  box-sizing: border-box;
+}
+
+.judge-group-selector select:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.judge-group-selector input[type="text"], .judge-group-selector input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 16px;
+  color: #333;
+  background-color: #f9f9f9;
+  box-sizing: border-box;
+}
+
+.judge-group-selector input[type="number"]::-webkit-inner-spin-button,
+.judge-group-selector input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.judge-group-selector table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 30px;
+}
+
+.judge-group-selector table, .judge-group-selector th, .judge-group-selector td {
+  border: 1px solid #e0e0e0;
+}
+
+.judge-group-selector th, .judge-group-selector td {
+  padding: 12px;
+  text-align: left;
+}
+
+.judge-group-selector th {
+  background-color: #f1f1f1;
+  color: #555;
+  font-weight: 600;
+}
+
+.judge-group-selector tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+.judge-group-selector tr:hover {
+  background-color: #f0f0f0;
+}
+
+.judge-group-selector ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.judge-group-selector ul li {
+  padding: 10px;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  font-size: 16px;
+  color: #333;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.judge-group-selector button {
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  padding: 12px 20px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.judge-group-selector button:hover {
+  background-color: #0056b3;
+}
+
+.judge-group-selector button:focus {
+  outline: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .judge-group-selector h1 {
+    font-size: 24px;
+  }
+
+  .judge-group-selector h2 {
+    font-size: 20px;
+  }
+
+  .judge-group-selector select, .judge-group-selector input {
+    font-size: 14px;
+  }
+
+  .judge-group-selector button {
+    font-size: 14px;
+  }
+
+  .judge-group-selector table {
+    font-size: 14px;
+  }
+}

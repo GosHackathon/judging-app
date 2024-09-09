@@ -16,13 +16,14 @@ import JudgeList from './components/JudgeList';
 import TeamList from "./components/TeamList";
 import JudgeHome from "./components/JudgeHome";
 import Form from "./components/Form";
-//<Route
-         // path="/display-scores/:judgeId" // Define the route for DisplayScore AddCriteriaScores
-         // element={<ProtectedRoute element={<DisplayScore />} />} 
-        ///>
+//import AddCriteriaScores from "./components/AddFinalScore"; 
 //<Route path="/add-criteria-scores" element={<AddCriteriaScores />} />
 //import DisplayScore from "./components/DisplayScore"; // Import DisplayScore AddCriteriaScores
 //import AddCriteriaScores from "./components/AddCriteriaScores";
+import AddFinalScore from './components/AddFinalScore'; // Adjust path
+import ScoreManagement from "./components/ScoreManagement";
+
+
 function App() {
   return (
     <Router>
@@ -68,10 +69,14 @@ function App() {
         path="/form" 
         element={<ProtectedRoute element={<Form />} />} 
         />
+        <Route
+          path="score-management"
+          element={<ProtectedRoute element={<ScoreManagement />} />}
+        />
         
         
         <Route path="/judge-groups" element={<JudgeGroups />} />
-       
+        <Route path="/add-final-score" element={<AddFinalScore />} />
         <Route path="/judges" element={<JudgeList />} />
         <Route path="/team-list" element={<TeamList />} />
         

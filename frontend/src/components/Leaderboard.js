@@ -1,31 +1,31 @@
 import React, { useState, useEffect } from "react";
 import {
-  getLeaderboard,
-  downloadConsolidatedSpreadsheet,
+  getFinalScores,
+  downloadFinalScoreSpreadsheet,
 } from "../services/apiService";
 import "./Leaderboard.css";
 
 function Leaderboard({ isMainJudge }) {
-  const [leaderboard, setLeaderboard] = useState([]);
+  const [finalScores, setFinalScores] = useState([]);
   const [error, setError] = useState("");
 
   useEffect(() => {
-    const fetchLeaderboard = async () => {
+    const fetchFinalScores = async () => {
       try {
-        const response = await getLeaderboard(); // Use API service function
-        setLeaderboard(response.data);
+        const response = await getFinalScores(); // Use API service function for final scores
+        setFinalScores(response.data);
       } catch (error) {
-        console.error("There was an error fetching the leaderboard!", error);
-        setError("Error fetching leaderboard data.");
+        console.error("There was an error fetching the final scores!", error);
+        setError("Error fetching final scores.");
       }
     };
 
-    fetchLeaderboard();
+    fetchFinalScores();
   }, []);
 
   const handleDownloadSpreadsheet = async () => {
     try {
-      await downloadConsolidatedSpreadsheet();
+      await downloadFinalScoreSpreadsheet(); // Use API service function to download spreadsheet
     } catch (error) {
       setError("Error downloading spreadsheet.");
       console.error("Error downloading spreadsheet:", error);
@@ -34,7 +34,7 @@ function Leaderboard({ isMainJudge }) {
 
   return (
     <div className="leaderboard-container">
-      <h2>Leaderboard</h2>
+      <h2>Final Scores</h2>
       {isMainJudge && (
         <button onClick={handleDownloadSpreadsheet} className="btn btn-primary">
           Download Consolidated Spreadsheet
@@ -44,14 +44,16 @@ function Leaderboard({ isMainJudge }) {
       <table>
         <thead>
           <tr>
-            <th>Entry</th>
+            <th>Judge Group</th>
+            <th>Team Name</th>
             <th>Score</th>
           </tr>
         </thead>
         <tbody>
-          {leaderboard.map((entry, index) => (
+          {finalScores.map((entry, index) => (
             <tr key={index}>
-              <td>{entry.name}</td>
+              <td>{entry.judgeGroup}</td>
+              <td>{entry.teamName}</td>
               <td>{entry.score}</td>
             </tr>
           ))}

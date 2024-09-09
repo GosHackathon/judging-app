@@ -1,43 +1,91 @@
-.signup-container {
-  max-width: 450px;
-  margin: 0 auto;
-  padding: 30px;
-  background-color: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.signup-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: white; /* Set the background to white */
 }
 
-.signup-container h2 {
-  text-align: center;
-  font-size: 24px;
-  color: #333;
+.signup-container {
+  width: 350px;
+  padding: 20px;
+  background-color: #fff; /* Background color of the form container */
+  border-radius: 8px;
+  /* Removed box-shadow to eliminate the shadow effect */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
   margin-bottom: 20px;
+}
+
+.signup-icon {
+  font-size: 40px;
+  color: #ff7900;
+  margin-bottom: 10px;
+}
+
+.signup-header {
+  font-size: 24px;
+  font-weight: bold;
+  color: black;
+  text-align: center;
 }
 
 .signup-container form {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .signup-container input {
-  margin-bottom: 20px;
-  padding: 12px;
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 10px;
   border: 1px solid #dcdcdc;
-  border-radius: 8px;
-  font-size: 16px;
+  border-radius: 5px;
+  font-size: 14px;
   outline: none;
 }
 
 .signup-container input:focus {
-  border-color: #007bff;
-  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+  border-color: #ff7900;
+}
+
+.password-container {
+  position: relative;
+  width: 100%;
+}
+
+.password-container input {
+  width: 100%;
+  padding-right: 40px; /* Adjust for the eye icon */
+}
+
+.toggle-password {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  user-select: none;
+  font-size: 16px;
+  color: black;
 }
 
 .signup-container button {
-  padding: 12px;
-  background-color: #007bff;
+  width: 100%;
+  padding: 10px;
+  background-color: #ff7900;
   border: none;
-  border-radius: 8px;
+  border-radius: 5px;
   color: white;
   cursor: pointer;
   font-size: 16px;
@@ -45,12 +93,26 @@
 }
 
 .signup-container button:hover {
-  background-color: #0056b3;
+  background-color: #e66a00;
 }
 
 .error-message {
   color: #dc3545;
-  text-align: center;
   margin-top: 10px;
   font-size: 14px;
+}
+
+.login-redirect {
+  margin-top: 20px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.login-redirect a {
+  color: #ff7900;
+  text-decoration: none;
+}
+
+.login-redirect a:hover {
+  text-decoration: underline;
 }

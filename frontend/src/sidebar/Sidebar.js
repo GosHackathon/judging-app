@@ -3,11 +3,16 @@ import { Link } from "react-router-dom";
 import "./Sidebar.css";
 import { FaChevronLeft, FaChevronRight, FaHome, FaTachometerAlt, FaUsers, FaGavel, FaClipboardList, FaChartLine, FaFileAlt, FaUpload, FaCogs, FaSignOutAlt } from "react-icons/fa";
 
-function Sidebar({mainJudge}) {
+function Sidebar({ mainJudge }) {
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isScoreManagementOpen, setIsScoreManagementOpen] = useState(false);
 
   const toggleSidebar = () => {
     setIsCollapsed(!isCollapsed);
+  };
+
+  const toggleScoreManagement = () => {
+    setIsScoreManagementOpen(!isScoreManagementOpen);
   };
 
   return (
@@ -44,11 +49,27 @@ function Sidebar({mainJudge}) {
               {!isCollapsed && <span>Judge Management</span>}
             </Link>
           </li>
-          <li className="sidebar-navItem">
-            <Link to="/scores" className="sidebar-navLink">
+          <li className="sidebar-navItem has-submenu">
+            <button onClick={toggleScoreManagement} className="sidebar-navLink">
               <FaClipboardList />
               {!isCollapsed && <span>Score Management</span>}
-            </Link>
+            </button>
+            {isScoreManagementOpen && (
+              <ul className="sidebar-subnav">
+                <li className="sidebar-navItem">
+                  <Link to="/add-final-score" className="sidebar-navLink">
+                    <FaClipboardList />
+                    {!isCollapsed && <span>Add Final Score</span>}
+                  </Link>
+                </li>
+                <li className="sidebar-navItem">
+                  <Link to="/score-management" className="sidebar-navLink">
+                    <FaClipboardList />
+                    {!isCollapsed && <span>View Scores</span>}
+                  </Link>
+                </li>
+              </ul>
+            )}
           </li>
           <li className="sidebar-navItem">
             <Link to="/leaderboard" className="sidebar-navLink">
@@ -85,5 +106,4 @@ function Sidebar({mainJudge}) {
     </aside>
   );
 }
-
 export default Sidebar;

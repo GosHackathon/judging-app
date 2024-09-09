@@ -25,12 +25,12 @@ module.exports = async (req, res, next) => {
         return res.status(401).json({ msg: "Main Judge not found" });
       }
     } else {
-      return res.status(403).json({ msg: "Invalid token payload" });
+      return res.status(401).json({ msg: "Invalid token payload" });
     }
 
     next();
   } catch (err) {
     console.error("Token error:", err.message);
-    res.status(403).json({ msg: "Token is not valid" });
+    res.status(401).json({ msg: "Token is not valid" });
   }
 };
