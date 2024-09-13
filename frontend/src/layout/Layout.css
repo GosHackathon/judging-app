@@ -1,0 +1,84 @@
+/* Layout.css */
+
+/* Layout container */
+.layout {
+  display: flex;
+  height: 100vh;
+  overflow: hidden; /* Ensure content doesn't overflow the viewport */
+}
+
+/* Main content wrapper */
+.main-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* Main content area */
+.main-content {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto; /* Scrollable content area */
+  background-color: #ffffff; /* Background color for main content */
+}
+
+/* Fixed Navbar */
+.fixed-navbar {
+  position: fixed;
+  top: 0;
+  left: 250px; /* Adjust based on Sidebar width */
+  width: calc(100% - 250px); /* Adjust based on Sidebar width */
+  z-index: 1000;
+  background-color: #343a40; /* Background color for the navbar */
+  color: #ffffff; /* Text color for the navbar */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Shadow for the navbar */
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  width: 250px; /* Adjust width as needed */
+  top: 0;
+  bottom: 0;
+  background: #343a40; /* Darker background for the sidebar */
+  color: #ffffff; /* White text color */
+  padding: 20px;
+  overflow-y: auto; /* Scrollable sidebar */
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Slight shadow for the sidebar */
+}
+
+/* Sidebar Title */
+.sidebar-title {
+  font-size: 1.5rem;
+  margin: 0;
+  color: #ffffff; /* Light color for title */
+  font-weight: bold;
+}
+
+/* Sidebar Navigation */
+.sidebar-nav {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0; /* Margin for separation */
+}
+
+/* Navigation Items */
+.sidebar-navItem {
+  margin-bottom: 15px;
+}
+
+/* Navigation Links */
+.sidebar-navLink {
+  color: #ffffff; /* White color for links */
+  text-decoration: none;
+  display: block;
+  padding: 10px 15px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, padding 0.3s ease; /* Smooth transitions */
+}
+
+/* Link Hover Effect */
+.sidebar-navLink:hover {
+  background-color: #495057; /* Slightly lighter background on hover */
+  padding-left: 20px; /* Add padding on hover for visual effect */
+}
