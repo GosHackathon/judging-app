@@ -29,7 +29,7 @@
   left: 250px; /* Adjust based on Sidebar width */
   width: calc(100% - 250px); /* Adjust based on Sidebar width */
   z-index: 1000;
-  background-color: #343a40; /* Background color for the navbar */
+  background-color: #333; /* Background color for the navbar */
   color: #ffffff; /* Text color for the navbar */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Shadow for the navbar */
 }

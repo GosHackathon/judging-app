@@ -2,7 +2,7 @@ body {
   margin: 0;
   padding: 0;
   height: 100vh;
-  background-image: url('/public/images/GoSH24.png');
+  background-color: white;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -20,7 +20,7 @@ body {
   align-items: center;
   width: 100%;
   padding: 20px;
-  box-sizing: border-box;
+  /* box-sizing: border-box; */
   background: none;
   animation: fadeIn 1.2s ease-in-out;
 }
@@ -30,8 +30,8 @@ body {
   width: 100%;
   padding: 35px;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.95);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  /* background: rgba(255, 255, 255, 0.95); */
+  /* box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); */
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: relative;
@@ -125,7 +125,7 @@ body {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 }
 
-.error {
+.error-judgelogin {
   color: #e74c3c;
   margin-bottom: 15px;
   font-weight: 600;

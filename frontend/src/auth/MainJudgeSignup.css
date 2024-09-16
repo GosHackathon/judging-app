@@ -55,6 +55,16 @@
   outline: none;
 }
 
+.signup-form input {
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #dcdcdc;
+  border-radius: 5px;
+  font-size: 14px;
+  outline: none;
+}
+
 .signup-container input:focus {
   border-color: #ff7900;
 }

@@ -12,17 +12,24 @@ function MainJudgeSignup() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState(""); // Success message state
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError(""); // Clear previous error
     if (password !== confirmPassword) {
       setError("Passwords do not match.");
       return;
     }
     try {
       await signupMainJudge(name, email, password);
-      navigate("/main-judge-login");
+      setSuccess("Signup successful! Redirecting to login...");
+      
+      // Redirect after 2 seconds
+      setTimeout(() => {
+        navigate("/main-judge-login");
+      }, 2000);
     } catch (err) {
       setError("Error signing up.");
       console.error("Error signing up:", err);
@@ -40,7 +47,7 @@ function MainJudgeSignup() {
           <FontAwesomeIcon icon={faUserPlus} className="signup-icon" />
           <h2 className="signup-header">MAIN JUDGE SIGNUP</h2>
         </div>
-        <form onSubmit={handleSubmit}>
+        <form className="signup-form" onSubmit={handleSubmit}>
           <input
             type="text"
             placeholder="Enter your name"
@@ -76,11 +83,12 @@ function MainJudgeSignup() {
               required
             />
             <span onClick={toggleShowPassword} className="toggle-password">
-              <FontAwesomeIcon icon={showPassword ? faEye: faEyeSlash} />
+              <FontAwesomeIcon icon={showPassword ? faEye : faEyeSlash} />
             </span>
           </div>
           <button type="submit">Sign Up</button>
           {error && <p className="error-message">{error}</p>}
+          {success && <p className="success-message">{success}</p>} {/* Success message */}
         </form>
         <p className="login-redirect">
           Already have an account? <a href="/main-judge-login">Login here</a>

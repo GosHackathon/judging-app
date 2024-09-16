@@ -5,39 +5,49 @@ body {
   background-size: cover;
 }
 
-.login-container {
+.login-container-judge-login {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-}
-
-.login-form {
-  max-width: 400px;
-  width: 100%;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-  background: white;
-  text-align: center;
-}
-
-.login-form h2 {
-  margin-bottom: 20px;
-  font-size: 28px;
-  color: #333;
-}
-
-.login-form .form-group {
+  width: 350px;
+  padding: 20px;
+  background-color: #fff; /* Background color of the form container */
+  border-radius: 8px;
+  /* Removed box-shadow to eliminate the shadow effect */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   position: relative;
 }
 
-.login-form input {
+.login-form-judge-login {
+  max-width: 400px;
   width: 100%;
-  padding: 15px;
+  padding: 30px;
+  /* border-radius: 12px; */
+  /* box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); */
+  /* background: white; */
+  text-align: center;
+}
+
+.login-form-judge-login h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: black;
+  text-align: center;
+}
+
+.login-form-judge-login .form-group {
+  position: relative;
+}
+
+.login-form-judge-login input {
+  width: 100%;
+  padding: 10px;
   margin-bottom: 15px;
   border: 1px solid #ddd;
-  border-radius: 8px;
+  border-radius: 5px;
   font-size: 16px;
   box-sizing: border-box;
 }
@@ -51,7 +61,7 @@ body {
   color: #888;
 }
 
-.login-form button {
+.login-form-judge-login button {
   padding: 15px;
   border: none;
   border-radius: 8px;
@@ -62,13 +72,19 @@ body {
   transition: background-color 0.3s ease;
 }
 
-.login-form button:hover {
+.login-form-judge-login button:hover {
   background: darkorange;
 }
 
-.error {
+.error-login {
   color: #e1702e;
   margin-bottom: 15px;
+  font-size: 14px; /* Increase readability */
+  font-weight: bold; /* Make it more prominent */
+  /* text-align: center;  */
+
+
+  
 }
 
 .success {
@@ -102,8 +118,11 @@ body {
 
 
 /* New CSS to align "Forget password?" link to the right */
-.login-form p {
+.login-form-judge-login p {
   text-align: right; /* Align text to the right */
   margin: 0; /* Remove default margin */
   margin-bottom: 15px; /* Add margin below for spacing */
+  margin-top: 20px;
+  font-size: 14px;
+  text-align: center;
 }

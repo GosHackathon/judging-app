@@ -41,12 +41,14 @@
   }
   
   .user-name {
+    color: orange; /* Lighter color for email */
+
     font-weight: bold;
     margin: 0;
   }
   
   .user-email {
-    color: #6c757d; /* Lighter color for email */
+    color: orange; /* Lighter color for email */
     margin: 0;
   }
   

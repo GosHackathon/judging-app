@@ -1,3 +1,13 @@
+.layout {
+  display: flex;
+}
+
+.sidebar {
+  width: 250px;
+  min-height: 100vh;
+}
+
+
 body {
   font-family: 'Arial', sans-serif;
   background-color: #f4f7f9;
@@ -8,7 +18,8 @@ body {
 .judge-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 80px 20px 20px;
+  flex-grow: 1;
 }
 
 .header {
@@ -29,7 +40,22 @@ body {
 .header p {
   margin: 5px 0 0;
   font-size: 1.2rem;
+
 }
+
+
+.judge-counts {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+}
+
+.judge-counts p {
+  margin: 0 20px;
+  color: #333;
+}
+
 
 .options {
   display: flex;
@@ -85,6 +111,4 @@ select, input[type="text"] {
   background-color: #f2f2f2;
 }
 
-.judge-table tr:hover {
-  background-color: #e9f5ff;
-}
+
