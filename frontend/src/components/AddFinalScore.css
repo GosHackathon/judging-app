@@ -1,132 +1,160 @@
-/* Scoped Styles for JudgeGroupSelector */
+General Styles
 .judge-group-selector {
-  font-family: 'Helvetica Neue', Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f5f6f7;
+  font-family: 'Roboto', sans-serif;
+  background-color: #f7f9fc;
+  padding: 80px 20px 20px;
 }
 
 .judge-group-selector .container {
-  margin: 0 auto;
-  max-width: 1000px;
-  padding: 30px;
   background-color: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.judge-group-selector h1, .judge-group-selector h2 {
-  color: #333;
+  border-radius: 12px;
+  padding: 80px 20px 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 .judge-group-selector h1 {
-  font-size: 28px;
+  font-size: 32px;
+  color: #333;
+  font-weight: 700;
   margin-bottom: 20px;
-  font-weight: 600;
+  text-align: center;
+}
+.judge-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 20px;
 }
 
-.judge-group-selector h2 {
-  font-size: 22px;
-  margin-top: 20px;
-  margin-bottom: 15px;
+.judge-card {
+  flex: 1;
+  min-width: 150px; /* Minimum width for each judge card */
+  max-width: 250px;
+  padding: 20px;
+  text-align: center;
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.judge-card p {
+  font-size: 18px;
   font-weight: 500;
+  color: #333;
 }
 
-.judge-group-selector select {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
+
+  .judge-group-selector h2 {
+    font-size: 24px;
+    color: #555;
+    font-weight: 600;
+    margin-top: 30px;
+    margin-bottom: 15px;
+  }
+
+  .judge-group-selector select, .judge-group-selector input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
+    color: #333;
+    background-color: #f9f9f9;
+    box-sizing: border-box;
+  }
+
+  .judge-group-selector select:focus, .judge-group-selector input:focus {
+    border-color: orange;
+    outline: none;
+  }
+
+  .judge-group-selector table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+  }
+
+  .judge-group-selector th, .judge-group-selector td {
+    border: 1px solid #ebedf2;
+    /* padding: 16px; */
+    text-align: center;
+    color: #333;
+  }
+
+  .judge-group-selector th {
+    background-color: #f5f6fa;
+    font-weight: 600;
+    color: #555;
+  }
+
+  .judge-group-selector td {
+    background-color: #ffffff;
+  }
+
+  .judge-group-selector tr:nth-child(even) td {
+    background-color: #f8f9fc;
+  }
+
+  .judge-group-selector tr:hover td {
+    background-color: #f1f3f8;
+  }
+
+/* Score Input */
+.score-input {
+  display: flex;
+  align-items: center;
+}
+
+.score-input input {
+  width: 50px;
+  text-align: center;
   border: 1px solid #ddd;
   border-radius: 6px;
-  font-size: 16px;
-  color: #333;
-  background-color: #f9f9f9;
-  box-sizing: border-box;
+  margin: 0 5px;
 }
 
-.judge-group-selector select:focus {
-  border-color: #007bff;
-  outline: none;
+.score-input button {
+  width: 36px;
+  height: 36px;
+  background-color: orange;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 50%;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
 }
 
-.judge-group-selector input[type="text"], .judge-group-selector input[type="number"] {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  font-size: 16px;
-  color: #333;
-  background-color: #f9f9f9;
-  box-sizing: border-box;
+.score-input button:hover {
+  background-color: orange;
 }
 
-.judge-group-selector input[type="number"]::-webkit-inner-spin-button,
-.judge-group-selector input[type="number"]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+.score-input button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
 }
 
-.judge-group-selector table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 30px;
-}
-
-.judge-group-selector table, .judge-group-selector th, .judge-group-selector td {
-  border: 1px solid #e0e0e0;
-}
-
-.judge-group-selector th, .judge-group-selector td {
-  padding: 12px;
-  text-align: left;
-}
-
-.judge-group-selector th {
-  background-color: #f1f1f1;
-  color: #555;
-  font-weight: 600;
-}
-
-.judge-group-selector tr:nth-child(even) {
-  background-color: #fafafa;
-}
-
-.judge-group-selector tr:hover {
-  background-color: #f0f0f0;
-}
-
-.judge-group-selector ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-
-.judge-group-selector ul li {
-  padding: 10px;
-  background-color: #ffffff;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  margin-bottom: 10px;
-  font-size: 16px;
-  color: #333;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-}
-
+Buttons
 .judge-group-selector button {
-  background-color: #007bff;
+  width: 100%;
+  background-color: orange;
   color: #ffffff;
   border: none;
-  padding: 12px 20px;
-  font-size: 16px;
-  border-radius: 6px;
+  padding: 15px;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .judge-group-selector button:hover {
-  background-color: #0056b3;
+  background-color: orange;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 .judge-group-selector button:focus {
@@ -136,7 +164,7 @@
 /* Responsive Design */
 @media (max-width: 768px) {
   .judge-group-selector h1 {
-    font-size: 24px;
+    font-size: 26px;
   }
 
   .judge-group-selector h2 {
@@ -148,7 +176,7 @@
   }
 
   .judge-group-selector button {
-    font-size: 14px;
+    font-size: 16px;
   }
 
   .judge-group-selector table {

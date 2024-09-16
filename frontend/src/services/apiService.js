@@ -145,6 +145,52 @@ export const uploadUpdatedSpreadsheet = async (file) => {
   return await apiCall("POST", "/spreadsheet/upload", formData, headers);
 };
 
+
+// Function to upload an updated spreadsheet
+export const saveContactUsForm = async (formData) => {
+  const token = localStorage.getItem("token");
+
+  const headers = {
+    Authorization: `Bearer ${token}`
+  };
+  return await apiCall("POST", "/contactus", formData, headers);
+};
+
+export async function getJudgeProfile(email) {
+  try {
+    const token = localStorage.getItem("token");
+
+    const headers = {
+      Authorization: `Bearer ${token}`
+    };
+
+    return await apiCall("GET", `/auth/judge/${email}`, {}, headers);
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+
+export async function updateJudgeProfile({email, name, password, confirmPassword}) {
+  try {
+    const token = localStorage.getItem("token");
+    
+    const headers = {
+      Authorization: `Bearer ${token}`
+    };
+
+
+    const payload = {
+      email, name, password, confirmPassword
+    }
+
+
+    return await apiCall("PUT", `/auth/judge/${email}`, payload, headers);
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
 // Function to download the team template
 export const downloadTeamTemplate = async () => {
   const token = localStorage.getItem("token");
@@ -211,6 +257,17 @@ export const fetchJudges = async () => {
     throw error; // Rethrow the error to handle it in the component
   }
 };
+// Function to fetch the list of judges
+export const fetchTeams = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/teams`);
+    return response.data;
+  } catch (error) {
+    console.error('There was an error fetching the judges!', error);
+    throw error; // Rethrow the error to handle it in the component
+  }
+};
+
 //function to get the team list for the judge display page
 
 export const fetchJudgeAndTeams = async () => {
@@ -304,7 +361,7 @@ export const fetchJudgesByGroup = async (groupId) => {
 // Function to fetch teams for a specific judge group
 export const fetchTeamsByGroup = async (groupId) => {
   try {
-    const response = await axios.get(`${API_URL}/finalscore/judgeGroups/${groupId}/teams`, { 
+    const response = await axios.get(`${API_URL}/finalscore/judgeGroups/${groupId}/teams`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`
       }
@@ -338,7 +395,7 @@ export const fetchJudgeGroups = async () => {
 export const fetchJudgesAndTeams = async (groupId) => {
   try {
     const response = await axios.get(`${API_URL}/finalScore/judgeGroups/${groupId}/details`);
-    
+
     return response.data;
   } catch (error) {
     console.error("Error fetching judges and teams:", error.response ? error.response.data : error.message);
@@ -407,7 +464,7 @@ export const fetchScoreManagementData = async () => {
   if (!token) {
     throw new Error("No token found");
   }
-  const headers = { 
+  const headers = {
     Authorization: `Bearer ${token}`,
     'Content-Type': 'application/json'  // Ensure the Content-Type is set
   };

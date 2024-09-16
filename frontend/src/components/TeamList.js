@@ -12,7 +12,7 @@ function TeamList() {
         const data = await fetchJudgeAndTeams();
         setTeamNames(data);
       } catch (error) {
-        setError('Could not fetch teams');
+        setError('Could not fetch teams at this time.');
       }
     };
 
@@ -20,13 +20,19 @@ function TeamList() {
   }, []);
 
   return (
-    <div>
-      <h2>Assigned Teams</h2>
+    <div className="team-list-container">
+      <h1 className="big-heading">Assigned Teams</h1> {/* Use h1 for big heading */}
       {error && <p>{error}</p>}
-      <ul>
-        {teamNames.map((teamName, index) => (
-          <li key={index}>{teamName}</li> // Display only team names
-        ))}
+      <ul className="team-list">
+        {teamNames.length > 0 ? (
+          teamNames.map((teamName, index) => (
+            <li key={index} className="team-item">
+              <span>{teamName}</span> {/* Display team names in circular elements */}
+            </li>
+          ))
+        ) : (
+          !error && <p>No teams assigned yet.</p>
+        )}
       </ul>
     </div>
   );

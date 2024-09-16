@@ -1,8 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate for navigation
 import "./MainJudgeHome.css"; // Import the CSS file
-import Sidebar from "../sidebar/Sidebar"; // Import the Sidebar component
-import FixedNavbar from "../navbar/FixedNavbar"; // Import the FixedNavbar component
+
 
 function MainJudgeHome() {
   const navigate = useNavigate(); // Initialize useNavigate
@@ -16,14 +15,14 @@ function MainJudgeHome() {
   return (
     <div className="main-container">
       {/* Include the FixedNavbar component */}
-      <FixedNavbar
+      {/* <FixedNavbar
         userName="Mohammed Faizal" // Consider fetching user data dynamically
         userEmail="faizalmohammed97@gmail.com" // Consider fetching user data dynamically
         onLogout={handleLogout}
       />
 
       {/* Include the Sidebar component */}
-      <Sidebar />
+      {/* <Sidebar />  */}
 
       {/* Main Content */}
       <div className="content">

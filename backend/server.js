@@ -1,6 +1,7 @@
 const express = require("express");
 const http = require("http");
 const mongoose = require("mongoose");
+const bodyParser = require("body-parser")
 const fileUpload = require("express-fileupload");
 const { Server } = require("socket.io");
 const cors = require("cors");
@@ -23,10 +24,13 @@ const judgeListRoutes = require('./routes/judgeList');
 const finalScoreRoutes = require('./routes/finalScore');
 const leaderboardRoutes = require('./routes/leaderboard'); // Adjust path as needed
 const scoreManagementRouter = require('./routes/scoreManagementRouter');
+const contactUsRouter = require('./routes/contactUsRouter');
 
 
 // Initialize Express app and HTTP server
 const app = express();
+app.use(bodyParser()) 
+
 const server = http.createServer(app);
 const io = new Server(server);
 
@@ -82,6 +86,9 @@ app.use('/api/judgeList', judgeListRoutes);
 app.use('/api/finalscore', finalScoreRoutes);
 app.use('/api/leaderboard', leaderboardRoutes); // Register the leaderboard routes
 app.use('/api/scores/management', scoreManagementRouter);
+app.use('/api/contactus', contactUsRouter);
+
+
 // WebSocket setup
 io.on("connection", (socket) => {
   console.log("A user connected");

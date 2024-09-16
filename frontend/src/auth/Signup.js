@@ -34,7 +34,7 @@ function Signup() {
       await signupUser(name, email, password);
       setSuccess("Account created successfully. Redirecting...");
       setTimeout(() => {
-        navigate("/");
+        navigate("/login");
       }, 2000);
     } catch (err) {
       setError(err.message || "Error creating account");
@@ -120,7 +120,7 @@ function Signup() {
           </button>
           <div className="login-link text-center mt-3">
             <p>
-              Already have an account? <Link to="/">Login here</Link>
+              Already have an account? <Link to="/login">Login here</Link>
             </p>
           </div>
         </form>

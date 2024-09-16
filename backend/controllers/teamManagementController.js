@@ -77,9 +77,9 @@ const insertTeams = async (teams) => {
         
         const newTeam = new UploadTeam({
           teamName: teamName,
-          teamEmail: teamEmail,
-          teamEmail: teamEmail,
+          teamEmail: teamEmail        
         });
+
 
         await newTeam.save();
       }
@@ -200,11 +200,11 @@ const insertJudgeGroups = async (judgeGroups) => {
 // Upload file
 exports.uploadTeamFile = async (req, res) => {
   try {
-    if (!req.files || !req.files.file) {
+    if ( !req.file) {
       return res.status(400).send("No file uploaded");
     }
 
-    const file = req.files.file;
+    const file = req.file;
     const workbook = XLSX.read(file.data, { type: "buffer" });
 
     // Log sheet names to verify

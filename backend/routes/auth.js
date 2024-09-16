@@ -5,6 +5,7 @@ const { check, validationResult } = require("express-validator");
 const Judge = require("../models/Judge");
 const MainJudge = require("../models/MainJudge"); // Import the MainJudge model
 const JudgeGroup = require("../models/JudgeGroup");
+const authMiddleware = require("../middleware/authMiddleware");
 
 const router = express.Router();
 
@@ -67,7 +68,7 @@ router.post(
 
       // Encrypt password
       const salt = await bcrypt.genSalt(10);
-      judge.password = await bcrypt.hash(password, salt);
+      judge.password = await bcrypt.hash(this.password, salt);
 
       // Save judge to database
       await judge.save();
@@ -268,5 +269,82 @@ router.post(
     }
   }
 );
+
+router.get("/judge/:email",authMiddleware, async (req, res) => {
+  try {
+    const { email } = req.params;
+
+    console.log(email, req.userType)
+
+    // Find the judge by email
+    let judge = await Judge.findOne({ email }).select("-password");
+
+
+    if (!judge) {
+      return res.status(404).json({ msg: "Judge not found" });
+    }
+
+    // Send the judge details
+    res.json(judge);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
+  }
+});
+
+router.put("/judge/:email", authMiddleware, async (req, res) => {
+  try {
+    const { email } = req.params;
+    const { name, newEmail, password, confirmPassword } = req.body;
+
+    let judgeData=null
+
+    if (req.userType === "judge") {
+      judgeData = await Judge.findOne({ email });
+    } else if (req.userType === "mainJudge") {
+      judgeData = await MainJudge.findOne({ email });
+    }
+
+    // Find the judge by emai
+    if (!judgeData) {
+      return res.status(404).json({ msg: "Judge not found" });
+    }
+
+    // Update name if provided
+    if (name) {
+      judgeData.name = name;
+    }
+
+    // Update email if newEmail is provided and it's different from current email
+    if (newEmail && newEmail !== judgeData.email) {
+      const emailExists = await Judge.findOne({ email: newEmail });
+      if (emailExists) {
+        return res.status(400).json({ msg: "New email is already in use" });
+      }
+      judgeData.email = newEmail;
+    }
+
+    // If password fields are provided, check if they match and update the password
+    if (password && confirmPassword) {
+      if (password !== confirmPassword) {
+        return res.status(400).json({ msg: "Passwords do not match" });
+      }
+
+      // Hash the new password before saving it
+      const salt = await bcrypt.genSalt(10);
+      judgeData.password = await bcrypt.hash(password, salt);
+    }
+
+    // Save the updated judge details
+    await judgeData.save();
+
+    res.json({ msg: "Judge profile updated successfully", judgeData });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
+  }
+});
+
+
 
 module.exports = router;

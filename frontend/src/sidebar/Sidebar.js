@@ -1,11 +1,25 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import {
+  FaChevronLeft,
+  FaChevronRight,
+  FaHome,
+  FaUsers,
+  FaGavel,
+  FaClipboardList,
+  FaChartLine,
+  FaFileAlt,
+  FaUpload,
+  FaCogs,
+  FaSignOutAlt,
+  FaUserCircle
+} from "react-icons/fa";
 import "./Sidebar.css";
-import { FaChevronLeft, FaChevronRight, FaHome, FaTachometerAlt, FaUsers, FaGavel, FaClipboardList, FaChartLine, FaFileAlt, FaUpload, FaCogs, FaSignOutAlt } from "react-icons/fa";
 
 function Sidebar({ mainJudge }) {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isScoreManagementOpen, setIsScoreManagementOpen] = useState(false);
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false); // State to toggle the settings submenu
 
   const toggleSidebar = () => {
     setIsCollapsed(!isCollapsed);
@@ -13,6 +27,10 @@ function Sidebar({ mainJudge }) {
 
   const toggleScoreManagement = () => {
     setIsScoreManagementOpen(!isScoreManagementOpen);
+  };
+
+  const toggleSettings = () => {
+    setIsSettingsOpen(!isSettingsOpen);
   };
 
   return (
@@ -31,12 +49,12 @@ function Sidebar({ mainJudge }) {
               {!isCollapsed && <span>Home</span>}
             </Link>
           </li>
-          <li className="sidebar-navItem">
+          {/* <li className="sidebar-navItem">
             <Link to="/dashboard" className="sidebar-navLink">
               <FaTachometerAlt />
               {!isCollapsed && <span>Dashboard</span>}
             </Link>
-          </li>
+          </li> */}
           <li className="sidebar-navItem">
             <Link to="/team-management" className="sidebar-navLink">
               <FaUsers />
@@ -89,12 +107,25 @@ function Sidebar({ mainJudge }) {
               {!isCollapsed && <span>Upload/Download Spreadsheet</span>}
             </Link>
           </li>
-          <li className="sidebar-navItem">
-            <Link to="/settings" className="sidebar-navLink">
+          
+          {/* Settings with sub-option */}
+          <li className="sidebar-navItem has-submenu">
+            <button onClick={toggleSettings} className="sidebar-navLink">
               <FaCogs />
               {!isCollapsed && <span>Settings</span>}
-            </Link>
+            </button>
+            {isSettingsOpen && (
+              <ul className="sidebar-subnav">
+                <li className="sidebar-navItem">
+                  <Link to="/manage-profile" className="sidebar-navLink">
+                    <FaUserCircle />
+                    {!isCollapsed && <span>Manage Profile</span>}
+                  </Link>
+                </li>
+              </ul>
+            )}
           </li>
+
           <li className="sidebar-navItem">
             <Link to="/main-judge-logout" className="sidebar-navLink">
               <FaSignOutAlt />
@@ -106,4 +137,5 @@ function Sidebar({ mainJudge }) {
     </aside>
   );
 }
+
 export default Sidebar;
