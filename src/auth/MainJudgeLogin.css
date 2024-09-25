@@ -1,0 +1,128 @@
+body {
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  background: url("/public/images/GoSH24.png") no-repeat center center fixed;
+  background-size: cover;
+}
+
+.login-container-judge-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 350px;
+  padding: 20px;
+  background-color: #fff; /* Background color of the form container */
+  border-radius: 8px;
+  /* Removed box-shadow to eliminate the shadow effect */
+ 
+  flex-direction: column;
+  
+  position: relative;
+}
+
+.login-form-judge-login {
+  max-width: 400px;
+  width: 100%;
+  padding: 30px;
+  /* border-radius: 12px; */
+  /* box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); */
+  /* background: white; */
+  text-align: center;
+}
+
+.login-form-judge-login h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: black;
+  text-align: center;
+}
+
+.login-form-judge-login .form-group {
+  position: relative;
+}
+
+.login-form-judge-login input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.password-field .password-toggle-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #888;
+}
+
+.login-form-judge-login button {
+  padding: 15px;
+  border: none;
+  border-radius: 8px;
+  background: #ff7300;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-form-judge-login button:hover {
+  background: darkorange;
+}
+
+.error-login {
+  color: #e1702e;
+  margin-bottom: 15px;
+  font-size: 14px; /* Increase readability */
+  font-weight: bold; /* Make it more prominent */
+  /* text-align: center;  */
+
+
+  
+}
+
+.success {
+  color: #e89326;
+  margin-bottom: 15px;
+}
+
+.signup-link {
+  margin-top: 20px;
+  text-align: center; /* Center the text and links */
+}
+
+.signup-link p {
+  
+  margin: 0;
+  margin-top: 10px;
+  color: black; /* Set the text color to black */
+}
+
+.signup-link a {
+  
+  color: darkorange;
+  text-decoration: none;
+  font-weight: lighter;
+}
+
+.signup-link a:hover {
+  
+  text-decoration: underline;
+}
+
+
+/* New CSS to align "Forget password?" link to the right */
+.login-form-judge-login p {
+  text-align: right; /* Align text to the right */
+  margin: 0; /* Remove default margin */
+  margin-bottom: 15px; /* Add margin below for spacing */
+  margin-top: 20px;
+  font-size: 14px;
+  text-align: center;
+}

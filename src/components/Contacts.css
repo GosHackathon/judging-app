@@ -1,0 +1,159 @@
+/* Contacts Component Styles */
+.contacts-component {
+  font-family: 'Arial', sans-serif;
+}
+
+.contacts-component .contact {
+  padding: 2rem;
+  max-width: 800px;
+  margin: auto;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.contacts-component .contact h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: #000;
+}
+
+.contacts-component .contact p {
+  margin-bottom: 1rem;
+}
+
+.contacts-component .contact a {
+  color: #ff9800;
+  text-decoration: none;
+}
+
+.contacts-component .form-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+  background-color: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  max-height: 80vh;
+}
+
+.contacts-component form {
+  width: 60%;
+}
+
+.contacts-component .form-group {
+  margin-bottom: 1rem;
+}
+
+.contacts-component label {
+  display: block;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.contacts-component .form-group input[type="text"],
+.contacts-component .form-group input[type="email"],
+.contacts-component .form-group input[type="tel"],
+.contacts-component .form-group textarea {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  background-color: #d3d3d3;
+  border-radius: 5px;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.contacts-component .form-group textarea {
+  height: 100px;
+}
+
+.contacts-component .form-group input:focus,
+.contacts-component .form-group textarea:focus {
+  outline: none;
+  border-color: #ff9800;
+  background-color: #e0e0e0;
+}
+
+.contacts-component button {
+  padding: 0.8rem 1.2rem;
+  background-color: #ff9800;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.contacts-component button:hover {
+  background-color: #e68a00;
+}
+
+.contacts-component .social-media {
+  width: 35%;
+  text-align: center;
+  padding: 1rem;
+}
+
+.contacts-component .social-media img {
+  width: 40px;
+  margin: 0 10px;
+}
+
+.contacts-component .social-media p {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.contacts-component .link-button {
+  background: none;
+  border: none;
+  color: #ff9800;
+  text-decoration: underline;
+  cursor: pointer;
+  font: inherit;
+  padding: 0;
+}
+
+.contacts-component .link-button:hover {
+  color: #e68a00;
+}
+
+.contacts-component .error-message {
+  color: red;
+  font-size: 0.9rem;
+  margin-top: 0.2rem;
+}
+
+.contacts-component .success-message {
+  color: green;
+  font-size: 0.9rem;
+  margin-top: 0.2rem;
+}
+
+.contacts-component .error-summary {
+  color: red;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+/* Checkbox styles */
+.contacts-component .form-group-contactus {
+  margin-bottom: 1rem;
+}
+
+.contacts-component .form-group-contactus div {
+  margin-bottom: 0.5rem;
+}
+
+.contacts-component .form-group-contactus input[type="checkbox"] {
+  margin-right: 0.5rem;
+}
+
+.contacts-component .form-group-contactus input[type="text"] {
+  margin-top: 0.5rem;
+}
