@@ -1,0 +1,329 @@
+/* Form Container */
+.form-container {
+  padding: 50px;
+  max-width: 1500px; /* Increased to 1400px for more width */
+  width: 95%;
+  margin: 0 auto;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  max-height: 70vh;
+}
+
+/* Form Title */
+.form-title {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 30px;
+  color: #333;
+  font-weight: bold;
+}
+
+/* Form Header */
+.form-header {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Organization Input */
+.num-org-input {
+  margin-left: 10px;
+  padding: 5px;
+  font-size: 16px;
+  width: 60px;
+}
+
+/* Form Content */
+.form-content {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+}
+
+/* Organization Title */
+.organization-title {
+  margin-bottom: 15px;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+/* Organization Input */
+.org-input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Form Table */
+.form-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.form-table th,
+.form-table td {
+  padding: 15px; /* Increased padding */
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+.category-cell {
+  font-weight: bold;
+  width: 25%; /* Increased width for category column */
+}
+
+.rating-cell {
+  width: 15%; /* Adjusted width for rating columns */
+}
+
+.radio-input {
+  margin-right: 5px;
+}
+
+/* Button Container */
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+/* Buttons */
+.submit-button,
+.clear-button,
+.clear-previous-button,
+.finish-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.submit-button {
+  background-color: #0ee123;
+  color: #0b0a0a;
+}
+
+.submit-button:hover {
+  background-color: #0b0806;
+}
+
+.clear-button,
+.clear-previous-button {
+  background-color: #e1690e;
+  color: #fff;
+}
+
+.clear-button:hover,
+.clear-previous-button:hover {
+  background-color: #100d0c;
+}
+
+.finish-button {
+  background-color: #e06112;
+  color: #fff;
+  display: block;
+  margin: 0 auto;
+}
+
+.finish-button:hover {
+  background-color: #129a05;
+}
+
+/* Confirmation Dialog */
+.confirmation-dialog {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 500px;
+  margin: 20px auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  text-align: center;
+}
+
+.confirmation-dialog p {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+/* Confirmation and Cancel Buttons */
+.confirm-button,
+.cancel-button {
+  padding: 8px 15px;
+  font-size: 16px;
+  margin: 5px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.confirm-button {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.confirm-button:hover {
+  background-color: #0056b3;
+}
+
+.cancel-button {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.cancel-button:hover {
+  background-color: #c82333;
+}
+
+/* Main Judge Actions */
+.main-judge-actions {
+  margin-top: 20px;
+}
+
+/* Error Message Above Each Team Section */
+.error-inline {
+  background-color: #f7f3f3;
+  color: rgb(244, 10, 10);
+  padding: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.success-message-inline {
+  background-color: #f4f9f4;
+  color: rgb(74, 164, 74);
+  padding: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.finish-scoring-section {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.finish-scoring-button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.finish-scoring-button:hover {
+  background-color: #45a049;
+}
+
+.error-message {
+  color: #f44336;
+  margin-bottom: 10px;
+}
+
+.description-container {
+  position: relative;
+}
+
+/* Styles for category descriptions */
+.category-cell .description-text {
+  display: none;
+  position: absolute;
+  z-index: 1000;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  padding: 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  line-height: 1.3;
+  text-align: left;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  max-width: 200px;
+  width: max-content;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+/* Styles for rating descriptions */
+.rating-cell .description-text {
+  display: none;
+  position: absolute;
+  z-index: 1000;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 1.4;
+  white-space: normal;
+  text-align: left;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  max-width: 250px;
+  width: max-content;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 5px;
+}
+
+.description-container:hover .description-text {
+  display: block;
+}
+
+/* Ensure the description doesn't interfere with table layout */
+td.category-cell,
+td.rating-cell {
+  position: relative;
+}
+
+/* Optional: Add a small arrow to the rating tooltip */
+.rating-cell .description-text::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #f9f9f9 transparent transparent transparent;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 1400px) {
+  .form-container {
+    padding: 15px;
+    max-width: 98%;
+  }
+
+  .form-table th,
+  .form-table td {
+    padding: 10px;
+  }
+
+  .category-cell {
+    width: 20%;
+  }
+
+  .rating-cell {
+    width: 16%;
+  }
+
+  .category-cell .description-text,
+  .rating-cell .description-text {
+    font-size: 10px;
+    padding: 5px;
+    max-width: 150px;
+  }
+}

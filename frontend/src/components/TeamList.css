@@ -1,0 +1,78 @@
+.team-list-container {
+  width: 90%;
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #f4f6f8;
+  border-radius: 12px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.big-heading {
+  font-size: 3rem;
+  color: #2c3e50;
+  text-align: center;
+  margin-bottom: 35px;
+  font-family: 'Roboto', sans-serif;
+}
+
+ul.team-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: row; /* Ensures items are in a single row */
+  justify-content: center;
+  flex-wrap: nowrap; /* Prevents wrapping to a new line */
+  overflow-x: auto; /* Adds horizontal scroll if the items overflow the container */
+}
+
+.team-item {
+  margin: 10px;
+  padding: 18px;
+  background-color: orange;
+  color: #ffffff;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.1rem;
+  cursor: default; /* Change cursor to default, indicating no interaction */
+  transition: none; /* Remove transition for hover effects */
+}
+
+/* Remove hover effects */
+.team-item:hover {
+  background-color: orange; /* Maintain the same background color on hover */
+  transform: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Keep the same shadow on hover */
+}
+
+p {
+  color: #e74c3c;
+  font-size: 1.1rem;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+}
+
+@media (max-width: 600px) {
+  .team-list-container {
+    width: 95%;
+    padding: 20px;
+  }
+
+  .big-heading {
+    font-size: 2rem;
+  }
+
+  .team-item {
+    width: 80px;
+    height: 80px;
+    font-size: 1rem;
+  }
+}
