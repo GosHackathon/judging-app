@@ -42,7 +42,9 @@ const JudgeGroupSelector = () => {
               criteria2: 'Girls',
               criteria2Text: '',
               criteria2Score: 0,
-              totalScore: score.averageScore || 0
+              totalScore: score.averageScore || 0,
+              eligibleForIndigenousInnovator: score.eligibleForIndigenousInnovator || false,
+              eligibleForGirlsWhoInnovate: score.eligibleForGirlsWhoInnovate || false
             }
           }), {});
           setScores(scoresMap);
@@ -74,6 +76,14 @@ const JudgeGroupSelector = () => {
     }));
   };
 
+  const handleCriteriaTextChange = (teamName, criteria, value) => {
+    setScores(prevScores => ({
+      ...prevScores[teamName],
+      [criteria]: value,
+      totalScore: calculateTotalScore(prevScores[teamName])
+    }));
+  };
+
   const handleScoreChange = (teamName, criteriaScore, delta) => {
     setScores(prevScores => ({
       ...prevScores,
@@ -98,7 +108,9 @@ const JudgeGroupSelector = () => {
         criteria1Score: teamScores.criteria1Score,
         criteria2: teamScores.criteria2,
         criteria2Score: teamScores.criteria2Score,
-        totalScore: teamScores.totalScore
+        totalScore: teamScores.totalScore,
+        eligibleForIndigenousInnovator: teamScores.eligibleForIndigenousInnovator || false,
+        eligibleForGirlsWhoInnovate: teamScores.eligibleForGirlsWhoInnovate || false
       }));
 
       await submitScores(selectedGroup, scoresToSubmit);
@@ -144,6 +156,8 @@ const JudgeGroupSelector = () => {
                       <th>Criteria 2</th>
                       <th>Criteria 2 Score</th>
                       <th>Total Score</th>
+                      <th>Eligible for Indigenous Innovator</th>
+                      <th>Eligible for Girls Who Innovate</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -196,6 +210,8 @@ const JudgeGroupSelector = () => {
                             </div>
                           </td>
                           <td>{teamScore.totalScore || 0}</td>
+                          <td>{teamScore.eligibleForIndigenousInnovator ? 'Yes' : 'No'}</td>
+                      <td>{teamScore.eligibleForGirlsWhoInnovate ? 'Yes' : 'No'}</td>
                         </tr>
                       );
                     })}
