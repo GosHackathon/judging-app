@@ -1,0 +1,130 @@
+/* Navbar should span full width regardless of sidebar */
+.fixed-navbar {
+  position: fixed;
+  top: 0;
+  left: 0; /* Ensure the navbar starts from the very left */
+  right: 0; /* Ensure the navbar spans the full width */
+  background-color: #f8f9fa; /* Light background color for the navbar */
+  border-bottom: 1px solid #e0e0e0; /* Optional: Border for visual separation */
+  padding: 10px 20px; /* Padding around the content */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000; /* Ensure the navbar is above other content */
+  transition: left 0.3s ease; /* Smooth transition when sidebar collapses */
+}
+
+/* No changes needed to title and other text */
+.nav-header-title {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+
+.route-text {
+  margin-left: 10px;
+  font-size: 1rem; /* Adjust size if needed */
+  color: #6c757d; /* Optional: color for the route text */
+}
+
+.profile-info-container {
+  display: flex;
+  align-items: center;
+  position: relative; /* Ensures the dropdown is positioned relative to the avatar */
+}
+
+.avatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px; /* Avatar size */
+  height: 40px;
+  background-color: burlywood; /* Avatar background color */
+  color: #ffffff; /* Avatar text color */
+  font-weight: bold;
+  font-size: 1rem;
+  border-radius: 50%; /* Circular avatar */
+  margin-right: 10px; /* Space between avatar and user info */
+  text-transform: uppercase; /* Ensures the initials are uppercase */
+  cursor: pointer;
+}
+
+.user-info-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-name {
+  font-weight: bold;
+  margin: 0;
+}
+
+.user-email {
+  color: #6c757d; /* Lighter color for email */
+  margin: 0;
+}
+
+/* Dropdown styles */
+.dropdown-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.dropdown-menu {
+  display: none; /* Hidden by default */
+  position: absolute;
+  top: 50px; /* Adjust for spacing from the avatar */
+  right: 0;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1000; /* Ensure the dropdown menu is above other content */
+  width: 200px; /* Set width for dropdown */
+  border-radius: 8px; /* Rounded corners */
+}
+
+.dropdown-menu.show {
+  display: block;
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-bottom: 1px solid #e0e0e0;
+  text-align: left; /* Align text inside the dropdown */
+}
+
+.dropdown-item:last-child {
+  border-bottom: none;
+}
+
+.dropdown-item:hover {
+  background-color: #f1f1f1; /* Highlight on hover */
+}
+
+.greeting-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+  padding: 10px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.greeting {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.avatar-icon {
+  color: #6c757d; /* Light grey for the avatar icon */
+}
+
+.dropdown-icon {
+  margin-right: 10px;
+}
