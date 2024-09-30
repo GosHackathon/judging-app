@@ -53,7 +53,7 @@
 .upload-btn {
   padding: 10px 15px;
   font-size: 0.9rem;
-  background-color: #007bff;
+  background-color: #ff7300;
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -61,7 +61,7 @@
 }
 
 .upload-btn:hover {
-  background-color: #0056b3;
+  background-color: orange;
 }
 
 /* Button styling */
@@ -78,12 +78,12 @@
 }
 
 .primary-btn {
-  background-color: #007bff;
+  background-color:orange;
   color: #fff;
 }
 
 .primary-btn:hover {
-  background-color: #0056b3;
+  background-color: orange;
 }
 
 .secondary-btn {
@@ -137,14 +137,14 @@
 
 .button {
   padding: 10px 20px;
-  background-color: #007bff;
+  background-color: orange;
   color: white;
   border: none;
   cursor: pointer;
 }
 
 .button:hover {
-  background-color: #0056b3;
+  background-color: orange;
 }
 
 .message {
