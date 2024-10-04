@@ -1,16 +1,133 @@
+/* Full page layout */
 .main-container {
   display: flex;
+  justify-content: center;
+  align-items: top;
+  height: 100vh; /* Full screen height */
+  
 }
 
-.sidebar {
-  width: 250px; /* Adjust the width as per your sidebar */
+/* Card styling for central content */
+.card {
+  width: 400px;
+  padding: 40px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for professionalism */
+  text-align: center;
 }
 
-.content {
+/* Heading styling */
+.card h1 {
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Subheading text */
+.card p {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+/* File upload section */
+.file-upload-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* File input box styling */
+.input-box {
   flex-grow: 1;
-  padding: 20px;
-  margin-left: 250px; /* Same width as the sidebar */
+  padding: 10px;
+  font-size: 0.9rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 10px;
 }
+
+/* Upload button */
+.upload-btn {
+  padding: 10px 15px;
+  font-size: 0.9rem;
+  background-color: #ff7300;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.upload-btn:hover {
+  background-color: orange;
+}
+
+/* Button styling */
+.button {
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  border: none;
+  margin-top: 20px;
+  display: block;
+  width: 100%; /* Full width for buttons */
+}
+
+.primary-btn {
+  background-color:orange;
+  color: #fff;
+}
+
+.primary-btn:hover {
+  background-color: orange;
+}
+
+.secondary-btn {
+  background-color: #6c757d;
+  color: #fff;
+}
+
+.secondary-btn:hover {
+  background-color: #5a6268;
+}
+
+/* Message styling for error or success */
+.message {
+  color: #dc3545;
+  margin-top: 10px;
+  font-size: 0.9rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .card {
+    width: 90%;
+    padding: 20px;
+  }
+  
+  .card h1 {
+    font-size: 1.5rem;
+  }
+  
+  .card p {
+    font-size: 0.9rem;
+  }
+  
+  .file-upload-section {
+    flex-direction: column;
+  }
+
+  .input-box, .upload-btn {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
+
+
 
 .upload-section,
 .download-section,
@@ -20,14 +137,14 @@
 
 .button {
   padding: 10px 20px;
-  background-color: #007bff;
+  background-color: orange;
   color: white;
   border: none;
   cursor: pointer;
 }
 
 .button:hover {
-  background-color: #0056b3;
+  background-color: orange;
 }
 
 .message {

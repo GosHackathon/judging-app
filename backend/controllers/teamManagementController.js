@@ -60,28 +60,47 @@ exports.downloadTeamTemplate = async (req, res) => {
 const insertTeams = async (teams) => {
   try {
     for (let team of teams) {
-      //console.log("Processing team:", team);
-      //console.log('Processing team:', team);
-
       const teamName = team.teamName;
-      //const teamEmail = team.teamEmail;
 
-      if (!teamName ) {
-        console.error('teamName or teamEmail is missing:', team);
+      // Safely check if these fields exist, default to false if they don't
+      let indigenousValue = team['eligible for indigenous innovator'];
+      let girlsWhoInnovateValue = team["eligible for 'girls who innovate"];
+
+      // Log values to see if they're correctly extracted
+      console.log('Raw eligible for indigenous innovator:', indigenousValue);
+      console.log("Raw eligible for 'girls who innovate':", girlsWhoInnovateValue);
+
+      // Trim the values in case of leading/trailing spaces
+      indigenousValue = indigenousValue ? indigenousValue.trim().toLowerCase() : '';
+      girlsWhoInnovateValue = girlsWhoInnovateValue ? girlsWhoInnovateValue.trim().toLowerCase() : '';
+
+      const eligibleForIndigenousInnovator = indigenousValue === 'yes';
+      const eligibleForGirlsWhoInnovate = girlsWhoInnovateValue === 'yes';
+
+      if (!teamName) {
+        console.error('teamName is missing:', team);
         continue;
       }
 
-      const existingTeam = await UploadTeam.findOne({ teamName: teamName });
+      // Find an existing team by teamName
+      const existingTeam = await UploadTeam.findOne({ teamName });
 
       if (!existingTeam) {
-        
+        // If the team doesn't exist, create a new one
         const newTeam = new UploadTeam({
-          teamName: teamName,
-         // teamEmail: teamEmail,
-         // teamEmail: teamEmail,
+          teamName,
+          eligibleForIndigenousInnovator,
+          eligibleForGirlsWhoInnovate
         });
 
         await newTeam.save();
+        console.log(`Inserted new team: ${teamName}`);
+      } else {
+        // If the team exists, update the existing record
+        existingTeam.eligibleForIndigenousInnovator = eligibleForIndigenousInnovator;
+        existingTeam.eligibleForGirlsWhoInnovate = eligibleForGirlsWhoInnovate;
+        await existingTeam.save();
+        console.log(`Updated team: ${teamName}`);
       }
     }
     return true;
@@ -90,7 +109,6 @@ const insertTeams = async (teams) => {
     return false;
   }
 };
-
 // Function to insert or update judges in the database
 // Function to insert or update judges in the database
 const insertOrUpdateJudges = async (judges) => {

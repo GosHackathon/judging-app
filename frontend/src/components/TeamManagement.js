@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./TeamManagement.css"; // Import the CSS file for styling
 import { useNavigate } from "react-router-dom";
-import Sidebar from "../sidebar/Sidebar"; // Import the Sidebar component
 
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5003/api";
 
@@ -61,12 +60,12 @@ const TeamManagement = () => {
   };
 
   const viewJudgeGroups = () => {
-    navigate("/judge-groups"); // Navigate to the JudgeGroups page
+    navigate("/main-judge/judge-groups"); // Navigate to the JudgeGroups page
   };
 
   return (
     <div className="main-container">
-      <Sidebar /> {/* Sidebar component included */}
+      
       <div className="content">
         <h1>Team Management</h1>
         <div className="upload-section">

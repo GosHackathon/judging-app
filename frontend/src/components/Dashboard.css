@@ -1,8 +1,46 @@
-.dashboard-container {
-  text-align: center;
-  padding: 50px;
+/* General Layout for Page */
+.dashboard-layout {
+  display: flex;
+  flex-direction: row; /* Ensure sidebar and content are laid out horizontally */
 }
 
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  background-color: #f7f9fc;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 70px; /* Adjust to the height of the navbar */
+  height: calc(100vh - 70px); /* Full height minus the navbar */
+  overflow-y: auto; /* Allow scrolling if the content is too long */
+  z-index: 1000;
+}
+
+/* Navbar */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #f8f9fa;
+  padding: 10px 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 1001;
+  height: 70px; /* Fixed height for the navbar */
+}
+
+/* Main Content */
+.dashboard-content {
+  margin-left: 250px; /* Make space for the sidebar */
+  padding: 50px;
+  padding-top: 120px; /* Ensure it doesn't overlap with the fixed navbar */
+  background-color: #fff;
+  flex-grow: 1;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* Dashboard links */
 .dashboard-links {
   display: flex;
   justify-content: center;
@@ -20,4 +58,11 @@
 
 .dashboard-links a:hover {
   background-color: #45a049;
+}
+
+/* Error styling */
+.error {
+  color: red;
+  margin-top: 20px;
+  text-align: center;
 }

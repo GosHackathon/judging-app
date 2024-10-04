@@ -25,10 +25,10 @@ const fetchJudgesAndTeams = async (req, res) => {
       .populate('judges')              // Populate judges details
       .populate({
         path: 'teams.teamId',          // Populate teamId field
-        select: 'teamName'                 // Select only the name field from UploadTeam
+        select: 'teamName eligibleForIndigenousInnovator eligibleForGirlsWhoInnovate'             // Select only the name field from UploadTeam
       })
       .exec();
-
+    console.log(judgeGroup);  
     if (!judgeGroup) {
       return res.status(404).json({ msg: 'Judge group not found.' });
     }
@@ -40,7 +40,7 @@ const fetchJudgesAndTeams = async (req, res) => {
       scores: {} // Empty scores as we are not using them here
     });
   } catch (error) {
-    console.error('Error fetching judges and teams:', error);
+    sole.conerror('Error fetching judges and teams:', error);
     res.status(500).json({ msg: 'Failed to fetch judges or teams.' });
   }
 };
@@ -57,7 +57,7 @@ const fetchTeamScores = async (req, res) => {
       })
       .populate({
         path: 'teams.teamId',          // Populate teamId field
-        select: 'teamName'             // Select only the name field from UploadTeam
+        select: 'teamName eligibleForIndigenousInnovator eligibleForGirlsWhoInnovate'             // Select only the name field from UploadTeam
       })
       .exec();
 
@@ -67,7 +67,7 @@ const fetchTeamScores = async (req, res) => {
 
     const teams = judgeGroup.teams;
     const judges = judgeGroup.judges;
-
+    //console.log(teams);
     // Create a map of judgeId to judgeName
     const judgeIdToNameMap = new Map();
     judges.forEach(judge => {
@@ -76,7 +76,7 @@ const fetchTeamScores = async (req, res) => {
       }
     });
 
-    console.log('Judge ID to Name Map:', Array.from(judgeIdToNameMap.entries()));
+    //console.log('Judge ID to Name Map:', Array.from(judgeIdToNameMap.entries()));
 
     // Fetch all scores for the teams and judges in this group at once
     const scores = await Score.find({
@@ -84,7 +84,7 @@ const fetchTeamScores = async (req, res) => {
       judgeId: { $in: Array.from(judgeIdToNameMap.keys()) } // Match judgeId field in Score schema
     });
 
-    console.log('Fetched Scores:', scores);
+    //console.log('Fetched Scores:', scores);
 
     const finalTeamScores = [];
 
@@ -96,8 +96,9 @@ const fetchTeamScores = async (req, res) => {
 
       // Filter scores related to this team
       const teamScores = scores.filter(score => score.team === team.teamId.teamName);
+      const teamDetails = team.teamId;
 
-      console.log(`Scores for team ${team.teamId.teamName}:`, teamScores);
+      //console.log(`Scores for team ${team.teamId.teamName}:`, teamScores);
 
       // For each judge in the group, check if they have scored this team
       for (const judge of judges) {
@@ -108,9 +109,9 @@ const fetchTeamScores = async (req, res) => {
           totalScore += judgeScore.totalScore;  // Add the score to the total
           scoreCount += 1;  // Increase the count of valid scores
 
-          console.log(`Judge ${judge.name} scored team ${team.teamId.teamName}: ${judgeScore.totalScore}`);
+         // console.log(`Judge ${judge.name} scored team ${team.teamId.teamName}: ${judgeScore.totalScore}`);
         } else {
-          console.log(`Judge ${judge.name} has not scored team ${team.teamId.teamName}`);
+          //console.log(`Judge ${judge.name} has not scored team ${team.teamId.teamName}`);
         }
       }
 
@@ -122,11 +123,13 @@ const fetchTeamScores = async (req, res) => {
         teamName: team.teamId.teamName,  // Ensure each team has its unique name
         averageScore: averageScore,
         totalScore: totalScore,
+        eligibleForIndigenousInnovator: teamDetails.eligibleForIndigenousInnovator,
+        eligibleForGirlsWhoInnovate: teamDetails.eligibleForGirlsWhoInnovate,
         numberOfScores: scoreCount,
       });
     }
 
-    console.log('Final team scores:', finalTeamScores);
+   // console.log('Final team scores:', finalTeamScores);
 
     // Return the final team scores
     res.status(200).json({ finalTeamScores });

@@ -73,6 +73,7 @@ export const getUserData = async () => {
   return await apiCall("GET", "/user/userData", {}, headers);
 };
 
+
 // Function to get Main Judge data
 export const getMainJudgeData = async () => {
   const token = localStorage.getItem("token");
@@ -145,6 +146,52 @@ export const uploadUpdatedSpreadsheet = async (file) => {
   return await apiCall("POST", "/spreadsheet/upload", formData, headers);
 };
 
+// Function to upload an updated spreadsheet
+export const saveContactUsForm = async (formData) => {
+  const token = localStorage.getItem("token");
+
+  const headers = {
+    Authorization: `Bearer ${token}`
+  };
+  return await apiCall("POST", "/contactus", formData, headers);
+};
+
+export async function getJudgeProfile(email) {
+  try {
+    const token = localStorage.getItem("token");
+
+    const headers = {
+      Authorization: `Bearer ${token}`
+    };
+
+    return await apiCall("GET", `/auth/judge/${email}`, {}, headers);
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+
+export async function updateJudgeProfile({email, name, password, confirmPassword}) {
+  try {
+    const token = localStorage.getItem("token");
+    
+    const headers = {
+      Authorization: `Bearer ${token}`
+    };
+
+
+    const payload = {
+      email, name, password, confirmPassword
+    }
+
+
+    return await apiCall("PUT", `/auth/main-judge/${email}`, payload, headers);
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+
 // Function to download the team template
 export const downloadTeamTemplate = async () => {
   const token = localStorage.getItem("token");
@@ -211,6 +258,19 @@ export const fetchJudges = async () => {
     throw error; // Rethrow the error to handle it in the component
   }
 };
+
+
+// Function to fetch the list of teams
+export const fetchTeams = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/teams`);
+    return response.data;
+  } catch (error) {
+    console.error('There was an error fetching the judges!', error);
+    throw error; // Rethrow the error to handle it in the component
+  }
+};
+
 //function to get the team list for the judge display page
 
 export const fetchJudgeAndTeams = async () => {
@@ -228,7 +288,7 @@ export const fetchJudgeAndTeams = async () => {
 };
 
 // Function to clear previously submitted scores
-export const clearPreviousScores = async (judgeName, team) => {
+export const clearPreviousScores = async (judgeId, team) => {
   const token = localStorage.getItem("token");
   if (!token) {
     throw new Error("No token found");
@@ -239,7 +299,7 @@ export const clearPreviousScores = async (judgeName, team) => {
   try {
     const response = await axios.delete(`${API_URL}/scores`, {
       headers,
-      data: { judgeName, team } // Send data in the request body for DELETE
+      data: { judgeId, team } // Send data in the request body for DELETE
     });
     return response.data;
   } catch (error) {
@@ -379,11 +439,13 @@ export const submitScores = async (groupId, scores) => {
 export const getFinalScores = async () => {
   try {
     const response = await axios.get(`${API_URL}/leaderboard/final-scores`); // Update endpoint as needed
-    return response;
+    return response.data;
   } catch (error) {
     throw new Error("Failed to fetch final scores");
   }
 };
+
+
 
 export const downloadFinalScoreSpreadsheet = async () => {
   try {
@@ -398,7 +460,7 @@ export const downloadFinalScoreSpreadsheet = async () => {
     link.click();
   } catch (error) {
     throw new Error("Failed to download spreadsheet");
-  }
+  }
 };
 
 //function to get score management data
@@ -414,4 +476,29 @@ export const fetchScoreManagementData = async () => {
   return await apiCall("GET", "/scores/management", {}, headers);
 };
 
+export const fetchScoresByGroup = async () => {
+  const response = await axios.get(`${API_URL}/scores/scores-by-group`);
+  return response.data;
+};
+
+
+//  function to check submitted scores
+export const checkSubmittedScores = async (judgeId, teamNames) => {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    throw new Error("No token found");
+  }
+  const headers = { Authorization: `Bearer ${token}` };
+
+  try {
+    const response = await axios.post(`${API_URL}/scores/check-submitted`, {
+      judgeId,
+      teamNames
+    }, { headers });
+    return response.data;
+  } catch (error) {
+    console.error("Error checking submitted scores:", error);
+    throw new Error("Error checking submitted scores");
+  }
+};
 

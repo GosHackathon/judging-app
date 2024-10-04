@@ -1,5 +1,5 @@
 const Score = require("../models/Score");
-
+const UploadTeam = require("../models/UploadTeam");
 
 // Function to submit scores
 //
@@ -169,5 +169,28 @@ exports.getExistingScores = async (req, res) => {
   } catch (error) {
     console.error("Error fetching existing scores:", error.message);
     res.status(500).json({ msg: "Error fetching existing scores", error: error.message });
+  }
+};
+
+//  function to check submitted scores
+exports.checkSubmittedScores = async (req, res) => {
+  const { judgeId, teamNames } = req.body;
+
+  if (!judgeId || !teamNames || !Array.isArray(teamNames)) {
+    return res.status(400).json({ msg: "Judge ID and team names array are required" });
+  }
+
+  try {
+    // Get all scores submitted by this judge
+    const submittedScores = await Score.find({ judgeId });
+    const submittedTeamNames = submittedScores.map(score => score.team);
+
+    // Find unsubmitted teams
+    const unsubmittedTeams = teamNames.filter(team => !submittedTeamNames.includes(team));
+
+    res.status(200).json({ unsubmittedTeams });
+  } catch (error) {
+    console.error("Error checking submitted scores:", error.message);
+    res.status(500).json({ msg: "Error checking submitted scores", error: error.message });
   }
 };

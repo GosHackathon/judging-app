@@ -4,15 +4,19 @@ const uploadTeamSchema = new mongoose.Schema({
   teamName: {
     type: String,
     required: true,
+    unique: true, // Ensure teamName is unique to avoid duplicates
   },
   teamMembers: {
     type: [String], // Array of strings to hold member names
     required: false,
   },
-  teamEmail: {
-    type: String,
-    required: false,
-    unique: true,
+  eligibleForIndigenousInnovator: {
+    type: Boolean, // true or false depending on eligibility
+    required: true, // Must be provided
+  },
+  eligibleForGirlsWhoInnovate: {
+    type: Boolean, // true or false depending on eligibility
+    required: true, // Must be provided
   },
   allocatedJudge: {
     type: mongoose.Schema.Types.ObjectId,

@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { fetchJudges } from '../services/apiService'; // Import the service function
+import { fetchJudges, fetchTeams } from '../services/apiService'; // Import the service function
 import './JudgeList.css'; // Import the CSS file
 
 function JudgeList() {
   const [judges, setJudges] = useState([]);
+  const [teams, setTeams] = useState([]);
+
   const [sortCriteria, setSortCriteria] = useState('name'); // Default sort by name
   const [selectedTeam, setSelectedTeam] = useState(''); // State for filtering by team
   const [searchTerm, setSearchTerm] = useState(''); // State for search term
@@ -65,11 +67,27 @@ function JudgeList() {
     return 0;
   });
 
+
+  // Calculate the total number of assigned and unassigned judges
+  const totalAssignedJudges = judges.filter(judge => judge.teams.length > 0).length;
+  const totalUnassignedJudges = judges.filter(judge => judge.teams.length === 0).length;
+
+
   return (
+    <div className="layout">
+    
+
     <div className="judge-container">
       <header className="header">
         <h1><b>JUDGES</b></h1>
       </header>
+      
+      {/* Display total counts */}
+      <div className="judge-counts">
+          <p>Total Assigned Judges: <b>{totalAssignedJudges}</b></p>
+          <p>Total Unassigned Judges: <b>{totalUnassignedJudges}</b></p>
+        </div>
+
       <div className="options">
         <div className="sort-options">
           <label htmlFor="sort">Sort by:</label>
@@ -84,9 +102,9 @@ function JudgeList() {
           <select id="team" value={selectedTeam} onChange={handleTeamChange}>
             <option value="">All Teams</option>
             {/* Dynamically add team options here */}
-            <option value="Team 1">Team 1</option>
-            <option value="Team 2">Team 2</option>
-            <option value="Team 3">Team 3</option>
+            {teams.map(team => {
+                return <option value={team._id}>{team.teamName}</option>
+              })}
             {/* Add more teams as needed */}
           </select>
         </div>
@@ -100,7 +118,7 @@ function JudgeList() {
           </select>
         </div>
 
-        <div className="search-bar">
+        <div className="search-bar-1">
           <label htmlFor="search">Search by Name:</label>
           <input
             type="text"
@@ -139,6 +157,7 @@ function JudgeList() {
           </tbody>
         </table>
       </div>
+    </div>
     </div>
   );
 }

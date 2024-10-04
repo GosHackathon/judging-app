@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { fetchScoreManagementData } from '../services/apiService';
 import './ScoreManagement.css';
+import * as XLSX from 'xlsx';
 
 const ScoreManagement = () => {
   const [scoreData, setScoreData] = useState([]);
   const [judgeGroups, setJudgeGroups] = useState([]);
-  const [selectedGroup, setSelectedGroup] = useState(null); // Group currently expanded
+  const [selectedGroup, setSelectedGroup] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [completionMessage, setCompletionMessage] = useState('');
+  const [showDownloadButton, setShowDownloadButton] = useState(false);
 
-  // Fetch data on component mount
   useEffect(() => {
     fetchData();
   }, []);
@@ -18,9 +19,7 @@ const ScoreManagement = () => {
   const fetchData = async () => {
     try {
       setLoading(true);
-      const response = await fetchScoreManagementData(); // Call to backend
-      
-      // Debug: Check the response structure
+      const response = await fetchScoreManagementData();
       console.log("API Response:", response);
       
       const groups = getUniqueGroups(response);
@@ -28,7 +27,6 @@ const ScoreManagement = () => {
       setScoreData(response);
       setLoading(false);
 
-      // Check if all groups are submitted
       checkAllGroupsSubmitted(groups);
     } catch (err) {
       console.error('Error fetching data:', err);
@@ -42,7 +40,7 @@ const ScoreManagement = () => {
     data.forEach(entry => {
       if (!entry.judgeGroupName) {
         console.error("Missing judgeGroupName in entry:", entry);
-        return; // Skip if judgeGroupName is missing
+        return;
       }
 
       if (!groups[entry.judgeGroupName]) {
@@ -50,8 +48,7 @@ const ScoreManagement = () => {
       }
       groups[entry.judgeGroupName].push(entry);
     });
-
-    // Debug: Check the groups object
+    
     console.log("Groups:", groups);
     
     return Object.keys(groups).map(groupName => ({
@@ -70,13 +67,60 @@ const ScoreManagement = () => {
     const allGroupsSubmitted = groups.every(group => group.status.toLowerCase() === 'submitted');
     if (allGroupsSubmitted) {
       setCompletionMessage('All judges have submitted their scores.');
+      setShowDownloadButton(true);
     } else {
       setCompletionMessage('');
+      setShowDownloadButton(false);
     }
   };
 
   const handleGroupClick = (groupName) => {
     setSelectedGroup(groupName === selectedGroup ? null : groupName);
+  };
+
+  const downloadScoresSheet = () => {
+    const flattenedData = judgeGroups.flatMap(group => 
+      group.entries.map(entry => ({
+        'Judge Group Name': group.groupName,
+        'Judge Name': entry.judgeName,
+        'Team Name': entry.teamName,
+        'Define the Problem': entry.scores[0],
+        'Solution Process': entry.scores[1],
+        'Benefits & Innovation': entry.scores[2],
+        'Pitch & Prototype': entry.scores[3],
+        'Teamwork': entry.scores[4],
+        'Total Score': entry.totalScore
+      }))
+    );
+
+    const worksheet = XLSX.utils.json_to_sheet(flattenedData);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Scores");
+
+    // Generate binary string
+    const excelBinaryString = XLSX.write(workbook, { bookType: 'xlsx', type: 'binary' });
+
+    // Convert binary string to ArrayBuffer
+    const buffer = new ArrayBuffer(excelBinaryString.length);
+    const view = new Uint8Array(buffer);
+    for (let i = 0; i < excelBinaryString.length; i++) {
+      view[i] = excelBinaryString.charCodeAt(i) & 0xFF;
+    }
+
+    // Create Blob
+    const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+
+    // Create download link
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'ScoresSheet.xlsx';
+    document.body.appendChild(link); // Needed for Firefox
+    link.click();
+    document.body.removeChild(link);
+
+    // Clean up
+    URL.revokeObjectURL(url);
   };
 
   if (loading) return <div className="loading">Loading...</div>;
@@ -92,7 +136,12 @@ const ScoreManagement = () => {
         </div>
       )}
 
-      {/* Judge Groups List */}
+      {showDownloadButton && (
+        <button onClick={downloadScoresSheet} className="download-button">
+          Download Scores Sheet
+        </button>
+      )}
+
       <div className="group-list">
         <table className="group-table">
           <thead>
@@ -113,7 +162,6 @@ const ScoreManagement = () => {
                   </td>
                 </tr>
 
-                {/* Expandable details */}
                 {selectedGroup === group.groupName && (
                   <tr>
                     <td colSpan="2">
@@ -136,16 +184,10 @@ const ScoreManagement = () => {
                             <tr key={index} className={entry.status.toLowerCase()}>
                               <td>{entry.judgeName}</td>
                               <td>{entry.teamName}</td>
-
-                              {/* Map through the individual scores */}
                               {entry.scores.map((score, scoreIndex) => (
                                 <td key={scoreIndex}>{score !== '-' ? score : '-'}</td>
                               ))}
-
-                              {/* Display total score */}
                               <td>{entry.totalScore !== '-' ? entry.totalScore : '-'}</td>
-
-                              {/* Display status */}
                               <td>
                                 <span className={`status ${entry.status.toLowerCase()}`}>
                                   {entry.status}

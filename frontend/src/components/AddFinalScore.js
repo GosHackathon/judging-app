@@ -42,7 +42,9 @@ const JudgeGroupSelector = () => {
               criteria2: 'Girls',
               criteria2Text: '',
               criteria2Score: 0,
-              totalScore: score.averageScore || 0
+              totalScore: score.averageScore || 0,
+              eligibleForIndigenousInnovator: score.eligibleForIndigenousInnovator || false,
+              eligibleForGirlsWhoInnovate: score.eligibleForGirlsWhoInnovate || false
             }
           }), {});
           setScores(scoresMap);
@@ -82,13 +84,13 @@ const JudgeGroupSelector = () => {
     }));
   };
 
-  const handleScoreChange = (teamName, criteriaScore, value) => {
+  const handleScoreChange = (teamName, criteriaScore, delta) => {
     setScores(prevScores => ({
       ...prevScores,
       [teamName]: {
         ...prevScores[teamName],
-        [criteriaScore]: Number(value),
-        totalScore: calculateTotalScore({...prevScores[teamName], [criteriaScore]: Number(value)})
+        [criteriaScore]: Math.max(0, (prevScores[teamName][criteriaScore] || 0) + delta),
+        totalScore: calculateTotalScore({...prevScores[teamName], [criteriaScore]: Math.max(0, (prevScores[teamName][criteriaScore] || 0) + delta)})
       }
     }));
   };
@@ -106,7 +108,9 @@ const JudgeGroupSelector = () => {
         criteria1Score: teamScores.criteria1Score,
         criteria2: teamScores.criteria2,
         criteria2Score: teamScores.criteria2Score,
-        totalScore: teamScores.totalScore
+        totalScore: teamScores.totalScore,
+        eligibleForIndigenousInnovator: teamScores.eligibleForIndigenousInnovator || false,
+        eligibleForGirlsWhoInnovate: teamScores.eligibleForGirlsWhoInnovate || false
       }));
 
       await submitScores(selectedGroup, scoresToSubmit);
@@ -118,107 +122,108 @@ const JudgeGroupSelector = () => {
   };
 
   return (
-    <div className="judge-group-selector">
-      <div className="container">
-        <h1>Select Judge Group</h1>
-        <select onChange={handleGroupChange} value={selectedGroup}>
-          <option value="">Select a group</option>
-          {groups.map(group => (
-            <option key={group._id} value={group._id}>{group.groupName}</option>
-          ))}
-        </select>
 
-        {selectedGroup && (
-          <div>
-            <h2>Judges</h2>
-            <ul>
-              {judges.map(judge => (
-                <li key={judge._id}>{judge.name}</li>
+      
+        <div className="judge-group-selector">
+          <div className="container">
+            <h1>SELECT JUDGE GROUP</h1>
+            <select onChange={handleGroupChange} value={selectedGroup}>
+              <option value="">Select a group</option>
+              {groups.map(group => (
+                <option key={group._id} value={group._id}>{group.groupName}</option>
               ))}
-            </ul>
+            </select>
 
-            <h2>Teams</h2>
-            <table>
-              <thead>
-                <tr>
-                  <th>Team Name</th>
-                  <th>Obtained Score</th>
-                  <th>Criteria 1</th>
-                  <th>Criteria 1 Score</th>
-                  <th>Criteria 2</th>
-                  <th>Criteria 2 Score</th>
-                  <th>Total Score</th>
-                </tr>
-              </thead>
-              <tbody>
-                {teams.map(team => {
-                  const teamScore = scores[team.teamName] || {};
-                  return (
-                    <tr key={team._id}>
-                      <td>{team.teamName}</td>
-                      <td>{teamScore.obtainedScore || 0}</td>
-                      <td>
-                        <select 
-                          value={teamScore.criteria1 || 'Indigenous'}
-                          onChange={(e) => handleCriteriaChange(team.teamName, 'criteria1', e.target.value)}
-                        >
-                          {criteriaOptions.map(option => (
-                            <option key={option} value={option}>{option}</option>
-                          ))}
-                        </select>
-                        {teamScore.criteria1 === 'Others' && (
-                          <input
-                            type="text"
-                            placeholder="Enter criteria"
-                            value={teamScore.criteria1Text || ''}
-                            onChange={(e) => handleCriteriaTextChange(team.teamName, 'criteria1Text', e.target.value)}
-                          />
-                        )}
-                      </td>
-                      <td>
-                        <input
-                          type="number"
-                          value={teamScore.criteria1Score || 0}
-                          onChange={(e) => handleScoreChange(team.teamName, 'criteria1Score', e.target.value)}
-                        />
-                      </td>
-                      <td>
-                        <select 
-                          value={teamScore.criteria2 || 'Girls'}
-                          onChange={(e) => handleCriteriaChange(team.teamName, 'criteria2', e.target.value)}
-                        >
-                          {criteriaOptions.map(option => (
-                            <option key={option} value={option}>{option}</option>
-                          ))}
-                        </select>
-                        {teamScore.criteria2 === 'Others' && (
-                          <input
-                            type="text"
-                            placeholder="Enter criteria"
-                            value={teamScore.criteria2Text || ''}
-                            onChange={(e) => handleCriteriaTextChange(team.teamName, 'criteria2Text', e.target.value)}
-                          />
-                        )}
-                      </td>
-                      <td>
-                        <input
-                          type="number"
-                          value={teamScore.criteria2Score || 0}
-                          onChange={(e) => handleScoreChange(team.teamName, 'criteria2Score', e.target.value)}
-                        />
-                      </td>
-                      <td>{teamScore.totalScore || 0}</td>
+            {selectedGroup && (
+              <div>
+                <h2>Judges</h2>
+                <div className="judge-grid">
+                  {judges.map(judge => (
+                    <div className="judge-card" key={judge._id}>
+                      <p>{judge.name}</p>
+                    </div>
+                  ))}
+                </div>
+
+                <h2>Teams</h2>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Team Name</th>
+                      <th>Obtained Score</th>
+                      <th>Criteria 1</th>
+                      <th>Criteria 1 Score</th>
+                      <th>Criteria 2</th>
+                      <th>Criteria 2 Score</th>
+                      <th>Total Score</th>
+                      <th>Eligible for Indigenous Innovator</th>
+                      <th>Eligible for Girls Who Innovate</th>
                     </tr>
-                  );
-                })}
-              </tbody>
-            </table>
+                  </thead>
+                  <tbody>
+                    {teams.map(team => {
+                      const teamScore = scores[team.teamName] || {};
+                      return (
+                        <tr key={team._id}>
+                          <td>{team.teamName}</td>
+                          <td>{teamScore.obtainedScore || 0}</td>
+                          <td>
+                            <select 
+                              value={teamScore.criteria1 || 'Indigenous'}
+                              onChange={(e) => handleCriteriaChange(team.teamName, 'criteria1', e.target.value)}
+                            >
+                              {criteriaOptions.map(option => (
+                                <option key={option} value={option}>{option}</option>
+                              ))}
+                            </select>
+                          </td>
+                          <td>
+                            <div className="score-input">
+                              <button onClick={() => handleScoreChange(team.teamName, 'criteria1Score', -1)}>-</button>
+                              <input
+                                type="number"
+                                value={teamScore.criteria1Score || 0}
+                                readOnly
+                              />
+                              <button onClick={() => handleScoreChange(team.teamName, 'criteria1Score', 1)}>+</button>
+                            </div>
+                          </td>
+                          <td>
+                            <select 
+                              value={teamScore.criteria2 || 'Girls'}
+                              onChange={(e) => handleCriteriaChange(team.teamName, 'criteria2', e.target.value)}
+                            >
+                              {criteriaOptions.map(option => (
+                                <option key={option} value={option}>{option}</option>
+                              ))}
+                            </select>
+                          </td>
+                          <td>
+                            <div className="score-input">
+                              <button onClick={() => handleScoreChange(team.teamName, 'criteria2Score', -1)}>-</button>
+                              <input
+                                type="number"
+                                value={teamScore.criteria2Score || 0}
+                                readOnly
+                              />
+                              <button onClick={() => handleScoreChange(team.teamName, 'criteria2Score', 1)}>+</button>
+                            </div>
+                          </td>
+                          <td>{teamScore.totalScore || 0}</td>
+                          <td>{teamScore.eligibleForIndigenousInnovator ? 'Yes' : 'No'}</td>
+                      <td>{teamScore.eligibleForGirlsWhoInnovate ? 'Yes' : 'No'}</td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
 
-            <button onClick={handleSubmitScores}>Submit Scores</button>
+                <button onClick={handleSubmitScores}>Submit Scores</button>
+              </div>
+            )}
           </div>
-        )}
-      </div>
-    </div>
+        </div>
+      
   );
 };
 

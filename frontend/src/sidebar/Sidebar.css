@@ -1,3 +1,14 @@
+/* Add styles to make the sidebar title a clickable link */
+.sidebar-title-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.sidebar-title-link:hover {
+  color: #1abc9c; /* Optional: Add hover effect */
+}
+
+
 /* Sidebar container */
 .sidebar {
   position: fixed;
@@ -15,6 +26,11 @@
 
 .sidebar.collapsed {
   width: 100px;
+}
+
+.sidebar.collapsed + .fixed-navbar {
+  left: 100px;
+  width: calc(100% - 100px);
 }
 
 /* Header of the sidebar */
@@ -60,10 +76,10 @@
   text-decoration: none;
   display: flex;
   align-items: center;
-  padding: 10px;
+  /* padding: 10px; */
   border-radius: 4px;
   transition: background-color 0.3s ease;
-  background-color: #2c3e50; /* Ensure default background color */
+  background-color: #333; /* Ensure default background color */
   border: none; /* Remove default button borders */
   outline: none; /* Remove default focus outline */
 }
@@ -74,7 +90,7 @@
 
 /* Hover effect for navigation links */
 .sidebar-navLink:hover {
-  background-color: #34495e;
+  background-color: #333;
 }
 
 /* Styles for active links */
@@ -96,7 +112,7 @@
   list-style: none;
   padding: 0;
   margin: 0;
-  background-color: #34495e; /* Ensure sub-menu background color matches the sidebar */
+  background-color: #333; /* Ensure sub-menu background color matches the sidebar */
 }
 
 .sidebar-nav .sidebar-subnav .sidebar-navItem {
@@ -106,7 +122,7 @@
 .sidebar-nav .sidebar-subnav .sidebar-navLink {
   padding: 10px 20px;
   font-size: 14px;
-  background-color: #34495e; /* Sub-menu background color */
+  background-color: #333; /* Sub-menu background color */
   color: #ecf0f1; /* Ensure text color */
   display: flex;
   align-items: center;
@@ -116,4 +132,28 @@
 
 .sidebar-nav .sidebar-subnav .sidebar-navLink:hover {
   background-color: #2c3e50; /* Hover effect for sub-menu */
+}
+
+/* Sub-menu for Settings - Manage Profile */
+.sidebar-navItem.has-submenu .sidebar-subnav {
+  padding-left: 20px;
+}
+
+.sidebar-navItem.has-submenu .sidebar-subnav .sidebar-navLink {
+  font-size: 14px;
+  padding: 10px 20px;
+}
+
+.sidebar-navItem.has-submenu .sidebar-subnav .sidebar-navLink span {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.sidebar-navItem.has-submenu .sidebar-navLink:hover .sidebar-subnav .sidebar-navLink {
+  background-color: #333; /* Hover effect for submenu items */
+}
+
+/* Collapsed state for sub-menus */
+.sidebar.collapsed .sidebar-subnav {
+  display: none;
 }

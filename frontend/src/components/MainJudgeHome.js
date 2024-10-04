@@ -1,8 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate for navigation
 import "./MainJudgeHome.css"; // Import the CSS file
-import Sidebar from "../sidebar/Sidebar"; // Import the Sidebar component
-import FixedNavbar from "../navbar/FixedNavbar"; // Import the FixedNavbar component
 
 function MainJudgeHome() {
   const navigate = useNavigate(); // Initialize useNavigate
@@ -10,21 +8,15 @@ function MainJudgeHome() {
   const handleLogout = () => {
     // Handle logout logic here
     localStorage.removeItem("token"); // Clear the token
-    navigate("/login"); // Redirect to the login page
+    navigate("/main-judge/login"); // Redirect to the login page
   };
 
   return (
     <div className="main-container">
       {/* Include the FixedNavbar component */}
-      <FixedNavbar
-        userName="Mohammed Faizal" // Consider fetching user data dynamically
-        userEmail="faizalmohammed97@gmail.com" // Consider fetching user data dynamically
-        onLogout={handleLogout}
-      />
+      
 
-      {/* Include the Sidebar component */}
-      <Sidebar />
-
+      
       {/* Main Content */}
       <div className="content">
         <section className="intro">

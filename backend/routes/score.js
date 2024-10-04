@@ -1,4 +1,4 @@
-// In your Express router file
+
 
 const express = require("express");
 const router = express.Router();
@@ -9,8 +9,10 @@ const {
   getAllScores,
   getScoresByGroup,
   clearScores,
-  getExistingScores, // Ensure this function is imported
+  getExistingScores,
+  checkSubmittedScores,
 } = require("../controllers/scoreController");
+
 
 // CREATE: Add new scores
 router.post("/", authMiddleware, submitScores);
@@ -29,5 +31,8 @@ router.get('/existing-scores', authMiddleware, getExistingScores); // Adjusted p
 
 // DELETE: Clear scores
 router.delete("/", authMiddleware, clearScores);
+
+//  check submitted scores
+router.post('/check-submitted', authMiddleware, checkSubmittedScores);  
 
 module.exports = router;

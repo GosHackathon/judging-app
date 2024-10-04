@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { fetchJudgeAndTeams } from '../services/apiService';
 import './TeamList.css'; // Import the CSS file
+import JudgeSidebar from "../sidebar/JudgeSidebar";
+import JudgeNavbar from "../navbar/JudgeNavbar";
 
 function TeamList() {
   const [teamNames, setTeamNames] = useState([]);
@@ -12,7 +14,7 @@ function TeamList() {
         const data = await fetchJudgeAndTeams();
         setTeamNames(data);
       } catch (error) {
-        setError('Could not fetch teams');
+        setError('Could not fetch teams at this time.');
       }
     };
 
@@ -20,14 +22,24 @@ function TeamList() {
   }, []);
 
   return (
-    <div>
-      <h2>Assigned Teams</h2>
+    <div className="main-content">
+      <JudgeSidebar />
+      <JudgeNavbar />
+    <div className="team-list-container">
+      <h1 className="big-heading">Assigned Teams</h1> {/* Use h1 for big heading */}
       {error && <p>{error}</p>}
-      <ul>
-        {teamNames.map((teamName, index) => (
-          <li key={index}>{teamName}</li> // Display only team names
-        ))}
+      <ul className="team-list">
+        {teamNames.length > 0 ? (
+          teamNames.map((teamName, index) => (
+            <li key={index} className="team-item">
+              <span>{teamName}</span> {/* Display team names in circular elements */}
+            </li>
+          ))
+        ) : (
+          !error && <p>No teams assigned yet.</p>
+        )}
       </ul>
+    </div>
     </div>
   );
 }
