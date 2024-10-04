@@ -44,7 +44,7 @@ function Login({ isMainJudge = false }) {
             {isMainJudge ? "Main Judge Login" : "Judge Login"}
           </h2>
         </div>
-        {error && <div className="error">{error}</div>}
+        {error && <div className="error-judgelogin">{error}</div>}
         {success && <div className="success">{success}</div>}
         <form onSubmit={handleLogin}>
           <div className="form-group">
