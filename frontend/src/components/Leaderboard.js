@@ -118,7 +118,7 @@ function Leaderboard({ isMainJudge }) {
     const headers = ["Group Name", "Team Name", "Score"];
     const csvContent = [
       headers.join(","),
-      ...allScores.map((score) => `${score.judgeGroup},${score.teamName},$${Math.round(score.score)}`)
+      ...allScores.map((score) => `${score.judgeGroup},${score.teamName},${Math.round(score.score)}`)
     ].join("\n");
 
     const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
